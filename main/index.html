@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS MARKET | Sklep z elektroniką</title>
+    <title>NEXUS MARKET | Subskrypcje streamingowe</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -14,14 +14,13 @@
         <div class="preloader-bar"><div class="preloader-progress" id="preloader-progress"></div></div>
     </div>
 
-    <!-- GWIAZDY W TLE -->
     <canvas id="stars-canvas"></canvas>
 
     <!-- NAWIGACJA -->
     <nav class="navbar">
         <div class="nav-logo" onclick="showPage('home')">NEXUS<span>MARKET</span></div>
         <div class="nav-actions">
-            <button class="nav-login" onclick="handleLoginClick()">LOGIN</button>
+            <button class="nav-login" id="login-btn" onclick="handleLoginClick()">LOGIN</button>
             <div class="nav-cart" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
         </div>
     </nav>
@@ -40,14 +39,14 @@
             <div class="hero-glow hero-glow-1"></div>
             <div class="hero-glow hero-glow-2"></div>
             <div class="hero-content">
-                <h1 class="hero-title">TECHNOLOGIA PRZYSZŁOŚCI</h1>
-                <p class="hero-subtitle">Najlepszy sprzęt elektroniczny w jednym miejscu.</p>
-                <button class="hero-btn" onclick="showPage('products')">Zobacz produkty</button>
+                <h1 class="hero-title">TWOJE SERWISY STREAMINGOWE</h1>
+                <p class="hero-subtitle">Najlepsze subskrypcje w jednym miejscu.</p>
+                <button class="hero-btn" onclick="showPage('products')">Zobacz ofertę</button>
             </div>
         </section>
         <section class="why-us">
-            <div class="why-card"><div class="why-icon">⚡</div><h3>Szybka wysyłka</h3><p>Zamówienia wysyłamy w 24h.</p></div>
-            <div class="why-card"><div class="why-icon">🛡️</div><h3>Gwarancja jakości</h3><p>Każdy produkt testowany.</p></div>
+            <div class="why-card"><div class="why-icon">⚡</div><h3>Natychmiastowa dostawa</h3><p>Dostęp wysyłamy w 5 minut.</p></div>
+            <div class="why-card"><div class="why-icon">🛡️</div><h3>Gwarancja działania</h3><p>Wymiana konta w razie problemów.</p></div>
             <div class="why-card"><div class="why-icon">💬</div><h3>Wsparcie 24/7</h3><p>Zawsze do dyspozycji.</p></div>
         </section>
     </div>
@@ -55,9 +54,9 @@
     <!-- PRODUCTS -->
     <div class="page" id="products-page" style="display:none;">
         <section class="products-section">
-            <h2 class="section-title">Nasze produkty</h2>
+            <h2 class="section-title">Nasze subskrypcje</h2>
             <div class="products-toolbar">
-                <input type="text" id="search-input" placeholder="Szukaj produktu..." oninput="renderProducts()">
+                <input type="text" id="search-input" placeholder="Szukaj serwisu..." oninput="renderProducts()">
                 <select id="sort-select" onchange="renderProducts()">
                     <option value="default">Domyślne</option>
                     <option value="price-asc">Cena: rosnąco</option>
@@ -76,13 +75,13 @@
         <section class="product-detail-section">
             <div class="product-detail">
                 <div class="product-detail-left">
-                    <div class="product-detail-emoji" id="product-detail-emoji"></div>
+                    <img id="product-detail-image" src="" alt="" class="product-detail-img">
                 </div>
                 <div class="product-detail-right">
                     <h2 class="product-detail-name" id="product-detail-name"></h2>
                     <p class="product-detail-price" id="product-detail-price"></p>
                     <p class="product-detail-short" id="product-detail-short"></p>
-                    <div class="product-detail-availability"><span class="green-dot"></span> W magazynie</div>
+                    <div class="product-detail-availability"><span class="green-dot"></span> Dostępny</div>
                     <div class="product-detail-actions">
                         <button class="add-to-cart-detail" onclick="addToCartFromDetail()">Dodaj do koszyka</button>
                         <button class="buy-now-btn" onclick="buyNow()">Kup teraz</button>
@@ -150,12 +149,36 @@
                 <div class="orders-list" id="orders-list"></div>
             </section>
             <section class="admin-section">
+                <h2 class="admin-section-title">Logi aktywności</h2>
+                <div class="logs-buttons">
+                    <button class="danger-btn" onclick="clearLogs()">Wyczyść logi</button>
+                    <button class="save-btn" onclick="exportLogs()">Zapisz logi</button>
+                </div>
+                <div class="logs-table-container">
+                    <table class="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>IP</th>
+                                <th>Urządzenie</th>
+                                <th>Przeglądarka</th>
+                                <th>Strona</th>
+                                <th>Akcja</th>
+                                <th>Status</th>
+                                <th>Miejscowość</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-table-body"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="admin-section">
                 <h2 class="admin-section-title">Produkty</h2>
                 <div class="admin-form">
                     <h3>Dodaj nowy produkt</h3>
                     <input type="text" id="admin-name" placeholder="Nazwa produktu">
                     <input type="number" id="admin-price" placeholder="Cena (zł)" step="0.01">
-                    <input type="text" id="admin-emoji" placeholder="Emoji (np. 💻)" maxlength="2">
+                    <input type="text" id="admin-image" placeholder="URL zdjęcia">
                     <input type="number" id="admin-stock" placeholder="Stan magazynowy" min="0">
                     <button class="admin-btn" onclick="addProduct()">Dodaj produkt</button>
                 </div>
@@ -164,7 +187,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">NEXUS<span>MARKET</span></div>
@@ -177,7 +199,6 @@
         </div>
     </footer>
 
-    <!-- CART -->
     <div class="cart-panel" id="cart-panel">
         <div class="cart-header"><h2>Twój koszyk</h2><button class="close-btn" onclick="toggleCart()">✕</button></div>
         <div class="cart-items" id="cart-items"></div>
@@ -187,7 +208,6 @@
         </div>
     </div>
 
-    <!-- LOGIN MODAL -->
     <div class="modal" id="login-modal">
         <div class="modal-content">
             <h2>Logowanie</h2>
@@ -201,7 +221,6 @@
         </div>
     </div>
 
-    <!-- ORDER MODAL STEP 1 -->
     <div class="modal" id="order-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -211,13 +230,12 @@
             <form id="order-form">
                 <input type="text" id="order-name" placeholder="Imię i nazwisko" required>
                 <input type="email" id="order-email" placeholder="Email" required>
-                <input type="text" id="order-address" placeholder="Adres dostawy" required>
+                <input type="text" id="order-address" placeholder="Adres email do wysyłki" required>
                 <button type="button" class="submit-btn" onclick="goToSummary()">Dalej</button>
             </form>
         </div>
     </div>
 
-    <!-- ORDER MODAL STEP 2 -->
     <div class="modal" id="summary-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -238,13 +256,12 @@
         </div>
     </div>
 
-    <!-- SUCCESS MODAL -->
     <div class="modal" id="success-modal">
         <div class="modal-content">
             <h2>Dziękujemy za zakup!</h2>
             <p class="success-text">Twoje zamówienie zostało przyjęte.</p>
             <div class="license-box"><span>Twój klucz:</span><strong id="license-key">XXXX-XXXX-XXXX-XXXX</strong></div>
-            <p class="success-email">Potwierdzenie wysłano na podany adres email.</p>
+            <p class="success-email">Dane dostępowe wysłano na podany adres email.</p>
             <button class="submit-btn" onclick="closeSuccess()">Zamknij</button>
             <button class="review-btn" onclick="openReviewForm()">Dodaj opinię</button>
             <div id="review-form-container" style="display:none; margin-top:20px;">
@@ -257,7 +274,6 @@
         </div>
     </div>
 
-    <!-- EDIT PRODUCT MODAL -->
     <div class="modal" id="edit-product-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -267,11 +283,22 @@
             <form id="edit-product-form">
                 <input type="text" id="edit-name" placeholder="Nazwa produktu" required>
                 <input type="number" id="edit-price" placeholder="Cena (zł)" step="0.01" required>
-                <input type="text" id="edit-emoji" placeholder="Emoji (np. 💻)" maxlength="2">
+                <input type="text" id="edit-image" placeholder="URL zdjęcia">
                 <input type="number" id="edit-stock" placeholder="Stan magazynowy" min="0" required>
                 <input type="text" id="edit-description" placeholder="Krótki opis">
                 <button type="submit" class="submit-btn">Zapisz zmiany</button>
             </form>
+        </div>
+    </div>
+
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <h2 id="confirm-title">Potwierdzenie</h2>
+            <p id="confirm-message" class="success-text">Czy na pewno chcesz to zrobić?</p>
+            <div class="summary-actions">
+                <button class="back-btn" onclick="closeConfirmModal()">Anuluj</button>
+                <button class="pay-btn" onclick="confirmYes()">Tak, potwierdzam</button>
+            </div>
         </div>
     </div>
 

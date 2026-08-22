@@ -1,5 +1,7 @@
 // ============ KONFIGURACJA EMAILJS ============
-emailjs.init('YOUR_PUBLIC_KEY');
+if (typeof emailjs !== 'undefined') {
+    emailjs.init('YOUR_PUBLIC_KEY');
+}
 const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
@@ -18,56 +20,56 @@ const DISCOUNT_CODES = {
 // ============ LISTA PRODUKTÓW ============
 const products = [
     { 
-        id: 1, name: "Laptop Gamingowy", price: 4999.99, emoji: "💻", stock: 4,
-        description: "Wydajny laptop dla graczy.",
-        features: ["Karta RTX 4070", "32GB RAM", "Dysk 2TB NVMe", "Ekran 165Hz"],
-        specs: { "Procesor": "Intel i9-13900H", "GPU": "RTX 4070", "RAM": "32GB", "Dysk": "2TB NVMe", "Ekran": "17.3\" 165Hz" }
+        id: 1, name: "Netflix Premium", price: 29.99, image: "https://logo.clearbit.com/netflix.com", stock: 25,
+        description: "Netflix Premium 4K. Dostęp dla 4 urządzeń jednocześnie.",
+        features: ["Jakość 4K UHD", "4 urządzenia", "Brak reklam", "Wszystkie kategorie"],
+        specs: { "Jakość": "4K UHD", "Urządzenia": "4", "Reklamy": "Brak", "Profil": "Pełny" }
     },
     { 
-        id: 2, name: "Klawiatura Mechaniczna", price: 349.99, emoji: "⌨️", stock: 12,
-        description: "Klawiatura z przełącznikami czerwonymi.",
-        features: ["RGB", "Aluminiowa obudowa", "Hot-swap"],
-        specs: { "Typ": "Mechaniczna", "Przełączniki": "Red", "Łączność": "USB-C" }
+        id: 2, name: "HBO Max", price: 24.99, image: "https://logo.clearbit.com/hbomax.com", stock: 18,
+        description: "HBO Max Full HD. Dostęp dla 3 urządzeń.",
+        features: ["Jakość Full HD", "3 urządzenia", "Hity kinowe", "Seriale HBO"],
+        specs: { "Jakość": "Full HD", "Urządzenia": "3", "Reklamy": "Brak", "Biblioteka": "Pełna" }
     },
     { 
-        id: 3, name: "Myszka Bezprzewodowa", price: 199.99, emoji: "🖱️", stock: 25,
-        description: "Lekka myszka dla profesjonalistów.",
-        features: ["Sensor 26000 DPI", "Waga 58g", "Bateria 90h"],
-        specs: { "DPI": "26000", "Waga": "58g", "Bateria": "90h" }
+        id: 3, name: "Disney+", price: 19.99, image: "https://logo.clearbit.com/disneyplus.com", stock: 30,
+        description: "Disney+ 4K. Marvel, Star Wars, Pixar i więcej.",
+        features: ["Jakość 4K", "4 urządzenia", "Marvel", "Star Wars"],
+        specs: { "Jakość": "4K", "Urządzenia": "4", "Reklamy": "Brak", "Biblioteka": "Pełna" }
     },
     { 
-        id: 4, name: "Słuchawki 7.1", price: 449.99, emoji: "🎧", stock: 8,
-        description: "Dźwięk przestrzenny 7.1.",
-        features: ["7.1 Surround", "Mikrofon ANC", "RGB"],
-        specs: { "Dźwięk": "7.1", "Mikrofon": "ANC", "Waga": "320g" }
+        id: 4, name: "Spotify Premium", price: 14.99, image: "https://logo.clearbit.com/spotify.com", stock: 50,
+        description: "Spotify Premium. Muzyka bez reklam i offline.",
+        features: ["Bez reklam", "Tryb offline", "Dowolna ilość urządzeń", "Wysoka jakość dźwięku"],
+        specs: { "Reklamy": "Brak", "Offline": "Tak", "Jakość": "320kbps", "Urządzenia": "Bez limitu" }
     },
     { 
-        id: 5, name: "Monitor 27 cali", price: 1299.99, emoji: "🖥️", stock: 6,
-        description: "Szybki monitor IPS 2K.",
-        features: ["165Hz", "1ms", "IPS"],
-        specs: { "Przekątna": "27\"", "Rozdzielczość": "2K", "Panel": "IPS" }
+        id: 5, name: "YouTube Premium", price: 23.99, image: "https://logo.clearbit.com/youtube.com", stock: 20,
+        description: "YouTube Premium rodzinny. Bez reklam i z YouTube Music.",
+        features: ["Bez reklam", "YouTube Music", "Tryb offline", "6 kont rodzinnych"],
+        specs: { "Reklamy": "Brak", "YouTube Music": "Tak", "Konta": "6", "Offline": "Tak" }
     },
     { 
-        id: 6, name: "Konsola", price: 2499.99, emoji: "🎮", stock: 3,
-        description: "Konsola nowej generacji.",
-        features: ["Dysk 1TB", "4K 120fps", "SSD"],
-        specs: { "Dysk": "1TB", "Wideo": "4K", "Pady": "2x" }
+        id: 6, name: "Amazon Prime Video", price: 19.99, image: "https://logo.clearbit.com/primevideo.com", stock: 15,
+        description: "Amazon Prime Video. Filmy, seriale i Prime Delivery.",
+        features: ["Filmy i seriale", "Prime Delivery", "4K HDR", "3 urządzenia"],
+        specs: { "Jakość": "4K HDR", "Urządzenia": "3", "Prime": "Tak", "Reklamy": "Brak" }
     },
     { 
-        id: 7, name: "Tablet", price: 899.99, emoji: "📱", stock: 15,
-        description: "Lekki tablet z rysikiem.",
-        features: ["11 cali", "Rysik", "256GB"],
-        specs: { "Ekran": "11\"", "Pamięć": "256GB", "Bateria": "12h" }
+        id: 7, name: "Apple TV+", price: 17.99, image: "https://logo.clearbit.com/apple.com", stock: 22,
+        description: "Apple TV+. Ekskluzywne seriale Apple Originals.",
+        features: ["Seriale Apple", "4K Dolby Vision", "6 kont rodzinnych", "Bez reklam"],
+        specs: { "Jakość": "4K Dolby Vision", "Konta": "6", "Reklamy": "Brak", "Biblioteka": "Apple Originals" }
     },
     { 
-        id: 8, name: "Smartwatch", price: 699.99, emoji: "⌚", stock: 20,
-        description: "Nowoczesny zegarek z GPS.",
-        features: ["AMOLED", "GPS", "Pulsoksymetr"],
-        specs: { "Ekran": "AMOLED", "GPS": "Tak", "Woda": "50m" }
+        id: 8, name: "Tidal HiFi", price: 21.99, image: "https://logo.clearbit.com/tidal.com", stock: 12,
+        description: "Tidal HiFi. Bezstratna jakość dźwięku dla audiofilów.",
+        features: ["Bezstratny dźwięk", "Master Quality", "Tryb offline", "Bez reklam"],
+        specs: { "Jakość": "Bezstratna", "Master": "Tak", "Offline": "Tak", "Reklamy": "Brak" }
     }
 ];
 
-// ============ ZMIENNE ============
+// ============ ZMIENNE GLOBALNE ============
 let cart = [];
 let currentOrderData = null;
 let currentLicenseKey = '';
@@ -76,6 +78,7 @@ let selectedRating = 0;
 let appliedDiscount = 0;
 let currentDetailProductId = null;
 let editingProductId = null;
+let confirmCallback = null;
 
 // ============ PRELOADER ============
 window.addEventListener('load', function() {
@@ -88,19 +91,167 @@ window.addEventListener('load', function() {
         if (width >= 100) {
             width = 100;
             clearInterval(interval);
-            setTimeout(function() {
-                preloader.classList.add('hidden');
-            }, 400);
+            setTimeout(function() { preloader.classList.add('hidden'); }, 400);
         }
         if (progress) progress.style.width = width + '%';
     }, 150);
     
-    setTimeout(function() {
-        preloader.classList.add('hidden');
-    }, 4000);
+    setTimeout(function() { preloader.classList.add('hidden'); }, 4000);
 });
 
-// ============ GWIAZDY ============
+setTimeout(function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader && !preloader.classList.contains('hidden')) {
+        preloader.classList.add('hidden');
+    }
+}, 5000);
+
+// ============ LOGOWANIE AKTYWNOŚCI ============
+function getBrowserName(userAgent) {
+    if (userAgent.includes('Firefox')) return 'Firefox';
+    if (userAgent.includes('Edg')) return 'Edge';
+    if (userAgent.includes('Chrome')) return 'Chrome';
+    if (userAgent.includes('Safari')) return 'Safari';
+    if (userAgent.includes('Opera')) return 'Opera';
+    return 'Inna';
+}
+
+function getDeviceType(userAgent) {
+    if (userAgent.includes('iPhone') || userAgent.includes('Android')) return 'Mobile';
+    if (userAgent.includes('iPad') || userAgent.includes('Tablet')) return 'Tablet';
+    return 'PC';
+}
+
+function logActivity(page, action, status = '200') {
+    const log = {
+        date: new Date().toLocaleString('pl-PL'),
+        ip: localStorage.getItem('nexus_last_ip') || 'Pobieranie...',
+        device: getDeviceType(navigator.userAgent),
+        browser: getBrowserName(navigator.userAgent),
+        page: page,
+        action: action,
+        status: status,
+        city: localStorage.getItem('nexus_last_city') || 'Nieznana'
+    };
+    
+    let logs = loadLogs();
+    logs.unshift(log);
+    if (logs.length > 100) logs = logs.slice(0, 100);
+    localStorage.setItem('nexus_visit_logs', JSON.stringify(logs));
+    
+    fetch('https://api.ipify.org?format=json')
+        .then(r => r.json())
+        .then(data => {
+            localStorage.setItem('nexus_last_ip', data.ip);
+            logs.forEach(l => { if (l.ip === 'Pobieranie...') l.ip = data.ip; });
+            localStorage.setItem('nexus_visit_logs', JSON.stringify(logs));
+            
+            return fetch(`https://ipapi.co/${data.ip}/json/`);
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data && data.city) {
+                localStorage.setItem('nexus_last_city', data.city + ', ' + (data.country_name || ''));
+                const updatedLogs = loadLogs();
+                updatedLogs.forEach(l => { if (l.city === 'Nieznana' || l.city === 'Pobieranie...') l.city = data.city + ', ' + (data.country_name || ''); });
+                localStorage.setItem('nexus_visit_logs', JSON.stringify(updatedLogs));
+            }
+        })
+        .catch(() => {});
+}
+
+function loadLogs() {
+    const saved = localStorage.getItem('nexus_visit_logs');
+    if (!saved) return [];
+    try { return JSON.parse(saved); } catch(e) { return []; }
+}
+
+function renderLogs() {
+    const tbody = document.getElementById('logs-table-body');
+    if (!tbody) return;
+    
+    const logs = loadLogs();
+    tbody.innerHTML = '';
+    
+    if (logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:rgba(255,255,255,0.4);padding:30px;">Brak logów</td></tr>';
+        return;
+    }
+    
+    logs.forEach(log => {
+        const tr = document.createElement('tr');
+        
+        let statusClass = 'info';
+        if (log.status === '200' || log.status === 'Sukces') statusClass = 'success';
+        if (log.status === 'Błąd') statusClass = 'error';
+        
+        tr.innerHTML = `
+            <td>${log.date || '—'}</td>
+            <td>${log.ip || '—'}</td>
+            <td>${log.device || '—'}</td>
+            <td>${log.browser || '—'}</td>
+            <td>${log.page || '—'}</td>
+            <td>${log.action || '—'}</td>
+            <td><span class="log-status ${statusClass}">${log.status || '—'}</span></td>
+            <td>${log.city || 'Nieznana'}</td>
+        `;
+        
+        tbody.appendChild(tr);
+    });
+}
+
+function clearLogs() {
+    showConfirmModal('Czyścić logi?', 'Czy na pewno chcesz usunąć wszystkie logi aktywności?', function() {
+        localStorage.setItem('nexus_visit_logs', JSON.stringify([]));
+        renderLogs();
+        showNotification('Wyczyszczono logi', 'error');
+    });
+}
+
+function exportLogs() {
+    const logs = loadLogs();
+    if (logs.length === 0) {
+        showNotification('Brak logów do zapisania', 'error');
+        return;
+    }
+    
+    let csv = 'Data,IP,Urządzenie,Przeglądarka,Strona,Akcja,Status,Miejscowość\n';
+    logs.forEach(log => {
+        csv += `"${log.date || ''}","${log.ip || ''}","${log.device || ''}","${log.browser || ''}","${log.page || ''}","${log.action || ''}","${log.status || ''}","${log.city || ''}"\n`;
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'logi.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    showNotification('Zapisano logi do pliku CSV', 'success');
+}
+
+// ============ MODAL POTWIERDZENIA ============
+function showConfirmModal(title, message, callback) {
+    document.getElementById('confirm-title').textContent = title;
+    document.getElementById('confirm-message').textContent = message;
+    confirmCallback = callback;
+    document.getElementById('confirm-modal').classList.add('active');
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirm-modal').classList.remove('active');
+    confirmCallback = null;
+}
+
+function confirmYes() {
+    if (confirmCallback) confirmCallback();
+    closeConfirmModal();
+}
+
+// ============ GWIAZDY W TLE ============
 function initStars() {
     const canvas = document.getElementById('stars-canvas');
     if (!canvas) return;
@@ -161,6 +312,10 @@ function showPage(pageName) {
         if (buttons[btnMap[pageName]]) buttons[btnMap[pageName]].classList.add('active');
     }
     
+    updateLoginButton();
+    
+    if (pageName !== 'admin') logActivity('/' + pageName, 'Wejście', '200');
+    
     if (pageName === 'products') renderProducts();
     if (pageName === 'reviews') renderReviews();
     if (pageName === 'account') renderAccount();
@@ -168,9 +323,23 @@ function showPage(pageName) {
         if (currentUser && currentUser.role === 'admin') {
             renderAdminProducts();
             renderOrders();
+            renderLogs();
         } else {
             showPage('home');
         }
+    }
+}
+
+// ============ PRZYCISK LOGIN ============
+function updateLoginButton() {
+    const btn = document.getElementById('login-btn');
+    if (!btn) return;
+    
+    if (currentUser) {
+        if (currentUser.role === 'admin') btn.textContent = 'ADMIN PANEL';
+        else btn.textContent = 'MOJE KONTO';
+    } else {
+        btn.textContent = 'LOGIN';
     }
 }
 
@@ -206,10 +375,13 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         closeLogin();
         document.getElementById('login-username').value = '';
         document.getElementById('login-password').value = '';
+        updateLoginButton();
+        logActivity('/login', 'Logowanie', 'Sukces');
         
         if (user.role === 'admin') showPage('admin');
         else showPage('account');
     } else {
+        logActivity('/login', 'Logowanie', 'Błąd');
         document.getElementById('login-error').style.display = 'block';
     }
 });
@@ -217,10 +389,11 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 function logout() {
     currentUser = null;
     sessionStorage.removeItem('nexus_user');
+    updateLoginButton();
     showPage('home');
 }
 
-// ============ KONTO ============
+// ============ KONTO UŻYTKOWNIKA ============
 function renderAccount() {
     if (!currentUser) { showPage('home'); return; }
     
@@ -266,7 +439,7 @@ function renderAccount() {
     });
 }
 
-// ============ DANE ============
+// ============ ŁADOWANIE I ZAPISYWANIE DANYCH ============
 function loadProducts() {
     const saved = localStorage.getItem('nexus_products');
     if (saved) {
@@ -319,7 +492,7 @@ function loadCartFromStorage() {
     updateCart();
 }
 
-// ============ KLUCZ ============
+// ============ GENEROWANIE KLUCZA ============
 function generateLicenseKey() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let key = '';
@@ -330,7 +503,7 @@ function generateLicenseKey() {
     return key;
 }
 
-// ============ PRODUKTY ============
+// ============ RENDEROWANIE PRODUKTÓW ============
 function renderProducts() {
     loadProducts();
     
@@ -364,7 +537,7 @@ function renderProducts() {
                 ${product.stock > 0 
                     ? `<span class="stock-badge">${product.stock} szt.</span>` 
                     : `<span class="stock-badge out-of-stock">Brak</span>`}
-                ${product.emoji}
+                <img src="${product.image || ''}" alt="${product.name}" onerror="this.style.display='none'">
             </div>
             <div class="product-info">
                 <div class="product-name">${product.name}</div>
@@ -378,13 +551,14 @@ function renderProducts() {
     });
 }
 
+// ============ STRONA PRODUKTU ============
 function openProductPage(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
     
     currentDetailProductId = productId;
     
-    document.getElementById('product-detail-emoji').textContent = product.emoji;
+    document.getElementById('product-detail-image').src = product.image || '';
     document.getElementById('product-detail-name').textContent = product.name;
     document.getElementById('product-detail-price').textContent = product.price.toFixed(2) + ' zł';
     document.getElementById('product-detail-short').textContent = product.description || 'Brak opisu.';
@@ -425,9 +599,9 @@ function renderReviews() {
     container.innerHTML = '';
     
     const defaultReviews = [
-        { stars: 5, text: "Świetny sklep! Laptop dotarł w 2 dni.", author: "Marek K." },
-        { stars: 5, text: "Polecam! Szybki kontakt i pomocna obsługa.", author: "Ania W." },
-        { stars: 4, text: "Dobra jakość. Monitor super.", author: "Piotr Z." }
+        { stars: 5, text: "Netflix działa idealnie! Dostęp dostałem w 5 minut.", author: "Marek K." },
+        { stars: 5, text: "Polecam! Spotify Premium bez problemów.", author: "Ania W." },
+        { stars: 4, text: "Dobra cena. Disney+ działa na 4 urządzeniach.", author: "Piotr Z." }
     ];
     
     const allReviews = [...reviews, ...defaultReviews];
@@ -455,14 +629,14 @@ function addToCart(productId) {
     if (!product) return;
     
     if (product.stock <= 0) {
-        showNotification('Produkt niedostępny!');
+        showNotification('Produkt niedostępny!', 'error');
         return;
     }
     
     const existing = cart.find(item => item.id === productId);
     if (existing) {
         if (existing.quantity >= product.stock) {
-            showNotification('Nie ma tylu sztuk na stanie!');
+            showNotification('Nie ma tylu sztuk na stanie!', 'error');
             return;
         }
         existing.quantity++;
@@ -472,7 +646,7 @@ function addToCart(productId) {
     
     updateCart();
     saveCartToStorage();
-    showNotification(`Dodano: ${product.name}`);
+    showNotification(`Dodano: ${product.name}`, 'success');
 }
 
 function removeFromCart(productId) {
@@ -515,21 +689,13 @@ function toggleCart() {
 }
 
 // ============ POWIADOMIENIA ============
-function showNotification(message) {
+function showNotification(message, type = 'success') {
     const notif = document.createElement('div');
-    notif.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, #6c5ce7, #fd79a8);
-        color: white;
-        padding: 15px 25px;
-        border-radius: 10px;
-        z-index: 400;
-        animation: slideIn 0.3s ease;
-        font-weight: bold;
-    `;
+    notif.className = 'notification';
+    if (type === 'error') notif.classList.add('error');
+    
     notif.textContent = message;
+    
     document.body.appendChild(notif);
     
     setTimeout(() => {
@@ -538,10 +704,10 @@ function showNotification(message) {
     }, 2000);
 }
 
-// ============ ZAMAWIANIE ============
+// ============ SYSTEM ZAMAWIANIA ============
 function checkout() {
     if (cart.length === 0) {
-        showNotification('Koszyk jest pusty!');
+        showNotification('Koszyk jest pusty!', 'error');
         return;
     }
     
@@ -631,7 +797,6 @@ function processPayment() {
         const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
         const total = appliedDiscount > 0 ? subtotal * (1 - appliedDiscount / 100) : subtotal;
         
-        // Zmniejsz stan magazynowy
         cart.forEach(item => {
             const product = products.find(p => p.id === item.id);
             if (product) product.stock = Math.max(0, product.stock - item.quantity);
@@ -657,6 +822,8 @@ function processPayment() {
         saveOrders(orders);
         sendConfirmationEmail(newOrder, currentLicenseKey);
         
+        logActivity('/checkout', 'Zakup', 'Sukces');
+        
         closeSummary();
         document.getElementById('license-key').textContent = currentLicenseKey;
         document.getElementById('success-modal').classList.add('active');
@@ -673,6 +840,11 @@ function processPayment() {
 }
 
 function sendConfirmationEmail(order, licenseKey) {
+    if (typeof emailjs === 'undefined') {
+        console.log('EmailJS nie jest załadowany – pomijam wysyłkę maila');
+        return;
+    }
+    
     const templateParams = {
         to_email: order.customer.email,
         to_name: order.customer.name,
@@ -733,7 +905,7 @@ function submitReview() {
     selectedRating = 0;
     document.querySelectorAll('.star-rating span').forEach(s => s.classList.remove('active'));
     
-    showNotification('Dziękujemy za opinię!');
+    showNotification('Dziękujemy za opinię!', 'success');
     closeSuccess();
     showPage('reviews');
 }
@@ -749,7 +921,7 @@ function renderAdminProducts() {
         item.className = 'admin-item';
         item.innerHTML = `
             <div class="admin-item-info">
-                <span class="admin-item-emoji">${product.emoji}</span>
+                <img src="${product.image || ''}" alt="" class="admin-item-image" onerror="this.style.display='none'">
                 <div>
                     <div class="admin-item-name">${product.name}</div>
                     <div class="admin-item-price">${product.price.toFixed(2)} zł | Stan: ${product.stock} szt.</div>
@@ -772,7 +944,7 @@ function openEditProductModal(productId) {
     
     document.getElementById('edit-name').value = product.name;
     document.getElementById('edit-price').value = product.price;
-    document.getElementById('edit-emoji').value = product.emoji;
+    document.getElementById('edit-image').value = product.image || '';
     document.getElementById('edit-stock').value = product.stock;
     document.getElementById('edit-description').value = product.description || '';
     
@@ -789,7 +961,7 @@ document.getElementById('edit-product-form').addEventListener('submit', function
     
     const name = document.getElementById('edit-name').value.trim();
     const price = parseFloat(document.getElementById('edit-price').value);
-    const emoji = document.getElementById('edit-emoji').value.trim() || '📦';
+    const image = document.getElementById('edit-image').value.trim();
     const stock = parseInt(document.getElementById('edit-stock').value) || 0;
     const description = document.getElementById('edit-description').value.trim();
     
@@ -802,13 +974,13 @@ document.getElementById('edit-product-form').addEventListener('submit', function
     if (product) {
         product.name = name;
         product.price = price;
-        product.emoji = emoji;
+        product.image = image;
         product.stock = stock;
         product.description = description;
         saveProducts();
         renderAdminProducts();
         renderProducts();
-        showNotification('Zaktualizowano produkt');
+        showNotification('Zaktualizowano produkt', 'success');
     }
     
     closeEditProductModal();
@@ -817,7 +989,7 @@ document.getElementById('edit-product-form').addEventListener('submit', function
 function addProduct() {
     const name = document.getElementById('admin-name').value.trim();
     const price = parseFloat(document.getElementById('admin-price').value);
-    const emoji = document.getElementById('admin-emoji').value.trim() || '📦';
+    const image = document.getElementById('admin-image').value.trim();
     const stock = parseInt(document.getElementById('admin-stock').value) || 0;
     
     if (!name || !price) {
@@ -827,17 +999,26 @@ function addProduct() {
     
     loadProducts();
     const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
-    products.push({ id: newId, name, price, emoji, stock, description: 'Brak opisu.', features: [], specs: {} });
+    products.push({ 
+        id: newId, 
+        name, 
+        price, 
+        image, 
+        stock, 
+        description: 'Brak opisu.', 
+        features: [], 
+        specs: {} 
+    });
     saveProducts();
     
     document.getElementById('admin-name').value = '';
     document.getElementById('admin-price').value = '';
-    document.getElementById('admin-emoji').value = '';
+    document.getElementById('admin-image').value = '';
     document.getElementById('admin-stock').value = '';
     
     renderAdminProducts();
     renderProducts();
-    showNotification('Dodano nowy produkt!');
+    showNotification('Dodano nowy produkt!', 'success');
 }
 
 function deleteProduct(id) {
@@ -848,7 +1029,7 @@ function deleteProduct(id) {
         saveProducts();
         renderAdminProducts();
         renderProducts();
-        showNotification('Usunięto produkt');
+        showNotification('Usunięto produkt', 'error');
     }
 }
 
@@ -904,16 +1085,16 @@ function updateOrderStatus(orderId, newStatus) {
     if (order) {
         order.status = newStatus;
         saveOrders(orders);
-        showNotification(`Status zamówienia #${orderId} zmieniony na: ${newStatus}`);
+        showNotification(`Status zamówienia #${orderId} zmieniony na: ${newStatus}`, 'success');
     }
 }
 
 function clearOrders() {
-    if (confirm('Czy na pewno chcesz usunąć wszystkie zamówienia?')) {
+    showConfirmModal('Czyścić zamówienia?', 'Czy na pewno chcesz usunąć wszystkie zamówienia? Tej operacji nie można cofnąć.', function() {
         saveOrders([]);
         renderOrders();
-        showNotification('Wyczyszczono zamówienia');
-    }
+        showNotification('Wyczyszczono zamówienia', 'error');
+    });
 }
 
 // ============ INICJALIZACJA ============
@@ -922,6 +1103,7 @@ if (savedUser) {
     try { currentUser = JSON.parse(savedUser); } catch(e) {}
 }
 
+updateLoginButton();
 loadCartFromStorage();
 renderProducts();
 initStars();
