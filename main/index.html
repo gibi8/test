@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>NEXUS MARKET | Subskrypcje streamingowe</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+        <!-- ============ PRELOADER ============ -->
+    <div class="preloader-full" id="preloader-full">
+        <div class="preloader-ring">
+            <div class="preloader-ring-spinner"></div>
+            <div class="preloader-logo">NEXUS<span>MARKET</span></div>
+        </div>
+        <div class="preloader-progress-bar">
+            <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- ============ TOP MARQUEE ============ -->
+    <div class="top-marquee">
+        <div class="marquee-track">
+            <span class="marquee-text">
+            <span>⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY •</span>
+            <span>⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY •</span>
+            <span>⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY •</span>
+            <span>⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY •</span>
+            </span>
+        </div>
+    </div>
+
+
+    <!-- ============ GWIAZDY ============ -->
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- ============ NAWIGACJA ============ -->
+    <nav class="navbar nm-navbar">
+        <div class="nav-logo nm-logo" onclick="showPage('home')">
+            <span class="nm-logo-mark">N</span>
+            <span>NEXUS<span>MARKET</span></span>
+        </div>
+        <div class="nm-nav-links">
+            <a href="#" class="nm-nav-link active" data-page="home" onclick="showPage('home'); return false;">HOME</a>
+            <a href="#" class="nm-nav-link" data-page="products" onclick="showPage('products'); return false;">PRODUCTS</a>
+            <a href="#" class="nm-nav-link" data-page="reviews" onclick="showPage('reviews'); return false;">REVIEWS</a>
+            <a href="#" class="nm-nav-link" data-page="support" onclick="showPage('support'); return false;">SUPPORT</a>
+        </div>
+        <div class="nav-actions nm-nav-actions">
+            <button class="nm-search-btn" onclick="openProductSearch()" aria-label="Szukaj">⌕</button>
+            <div class="nav-cart nm-cart" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+            <span class="nm-divider"></span>
+            <button class="nav-login nm-account" id="login-btn" onclick="handleLoginClick()">MOJE KONTO⌄</button>
+        </div>
+    </nav>
+
+    <!-- ============ STRONY ============ -->
+    <!-- HOME -->
+    <div class="page page-visible" id="home-page">
+        <section class="nm-home-hero">
+            <div class="nm-hero-copy">
+                <div class="nm-kicker">NEXUS MARKET</div>
+                <h1>Twoje ulubione<br><span>subskrypcje.</span><br>W jednym miejscu.</h1>
+                <p>Najlepsze konta premium w najniższych cenach.<br>Szybko, bezpiecznie i bez zbędnych formalności.</p>
+                <div class="nm-hero-actions">
+                    <button class="nm-primary" onclick="showPage('products')">Zobacz ofertę <b>→</b></button>
+                    <button class="nm-secondary" onclick="document.getElementById('nm-how').scrollIntoView({behavior:'smooth'})">▷ &nbsp; Jak to działa?</button>
+                </div>
+                <div class="nm-trust">
+                    <div class="nm-avatars"><span>👨🏻</span><span>👩🏻</span><span>👨🏽</span><span>👩🏼</span><b>+2K</b></div>
+                    <div><strong>Zaufanie ponad 2000+ klientów</strong><small><i>★★★★★</i> 4.9/5 na podstawie opinii</small></div>
+                </div>
+            </div>
+            <div class="nm-hero-visual">
+                <div class="nm-orbit-glow"></div>
+                <div class="nm-orbit-ring ring-a"></div><div class="nm-orbit-ring ring-b"></div>
+                <div class="nm-platform"><span>N</span></div>
+                <div class="nm-service-card netflix"><b>NETFLIX</b><small>Premium</small><strong>9,99 zł <em>/ mies.</em></strong></div>
+                <div class="nm-service-card spotify"><label>BESTSELLER</label><b>● Spotify</b><small>Premium</small><strong>8,99 zł <em>/ mies.</em></strong></div>
+                <div class="nm-service-card disney"><b>Disney+</b><small>Premium</small><strong>11,99 zł <em>/ mies.</em></strong></div>
+                <div class="nm-service-card youtube"><b>▶ YouTube</b><small>Premium</small><strong>9,99 zł <em>/ mies.</em></strong></div>
+                <div class="nm-service-card hbo"><b>HBO<span>max</span></b><small>Premium</small><strong>13,99 zł <em>/ mies.</em></strong></div>
+            </div>
+        </section>
+
+        <section class="nm-benefits" id="nm-how">
+            <div><strong>ϟ</strong><span><b>Natychmiastowa dostawa</b><small>Otrzymujesz dostęp nawet w 5 minut po płatności.</small></span></div>
+            <div><strong>♢</strong><span><b>Gwarancja działania</b><small>Wymiana konta lub zwrot pieniędzy w razie problemów.</small></span></div>
+            <div><strong>♧</strong><span><b>Wsparcie 24/7</b><small>Nasz zespół jest zawsze gotowy do pomocy.</small></span></div>
+            <div><strong>♙</strong><span><b>Bezpieczne płatności</b><small>Szyfrowane transakcje i ochrona Twoich danych.</small></span></div>
+        </section>
+    </div>
+
+    <!-- PRODUKTY -->
+    <div class="page" id="products-page" style="display:none;">
+        <section class="products-section">
+            <div class="products-header">
+                <h1 class="products-title">Wszystkie <span>produkty</span></h1>
+                <p class="products-subtitle">Przeglądaj pełną ofertę i wybierz najlepszą subskrypcję.</p>
+            </div>
+
+            <div class="products-container">
+                <aside class="products-filters">
+                    <div class="filter-group">
+                        <label class="filter-label">SZUKAJ</label>
+                        <input type="text" id="filter-search" placeholder="Szukaj produktów..." class="filter-input" oninput="applyFilters()">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">CENA (zł)</label>
+                        <div class="filter-price-row">
+                            <input type="number" id="filter-min" placeholder="Min" class="filter-input filter-price" min="0" oninput="updatePriceFromInput()">
+                            <span class="filter-price-sep">—</span>
+                            <input type="number" id="filter-max" placeholder="Max" class="filter-input filter-price" min="0" oninput="updatePriceFromInput()">
+                        </div>
+                        <div class="filter-price-sliders">
+                            <div class="filter-price-row">
+                                <span class="filter-price-label"><span id="filter-min-display">0</span> zł</span>
+                                <input type="range" id="filter-min-range" min="0" max="200" value="0" step="1" oninput="updatePriceRange()">
+                            </div>
+                            <div class="filter-price-row">
+                                <span class="filter-price-label"><span id="filter-max-display">200</span> zł</span>
+                                <input type="range" id="filter-max-range" min="0" max="200" value="200" step="1" oninput="updatePriceRange()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group filter-checkbox">
+                        <label class="filter-checkbox-label">
+                            <input type="checkbox" id="filter-instock" onchange="applyFilters()">
+                            <span class="filter-checkbox-custom"></span>
+                            Tylko dostępne
+                        </label>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="filter-apply-btn" onclick="applyFilters()">Zastosuj filtry</button>
+                        <button class="filter-reset-btn" onclick="resetFilters()">Resetuj filtry</button>
+                    </div>
+                </aside>
+
+                <div class="products-main">
+                    <div class="products-toolbar">
+                        <span class="products-count" id="products-count">0 produktów</span>
+                        <div class="products-view-options">
+                            <button class="view-btn active" onclick="setView('grid')" title="Siatka">▦</button>
+                            <button class="view-btn" onclick="setView('list')" title="Lista">☰</button>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="products"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CART PAGE -->
+    <div class="page" id="cart-page" style="display:none;">
+        <section class="cart-page-section">
+            <div class="cart-page-header">
+                <h1 class="cart-page-title">Twój <span>koszyk</span></h1>
+                <p class="cart-page-subtitle">Przejrzyj produkty przed złożeniem zamówienia.</p>
+            </div>
+
+            <div class="cart-page-container">
+                <div class="cart-page-products" id="cart-page-products"></div>
+                <div class="cart-page-summary">
+                    <div class="summary-card">
+                        <h3 class="summary-title">Podsumowanie</h3>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="summary-label">Subtotal</span>
+                            <span class="summary-value" id="cart-page-total">0.00 zł</span>
+                        </div>
+                        <p class="summary-note">Podatki i opłaty są obliczane przy kasie.</p>
+                        <div class="summary-verified">
+                            <span class="verified-icon">✓</span> Zweryfikowano
+                        </div>
+                        <button class="summary-checkout-btn" onclick="checkout()">Złóż zamówienie</button>
+                        <button class="summary-clear-btn" onclick="clearCart()">Wyczyść koszyk</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="page" id="reviews-page" style="display:none;">
+        <section class="reviews-section">
+            <div class="reviews-header">
+                <div class="reviews-badge">Ocena 4.99 na 5</div>
+                <h2 class="reviews-title">Opinie <span>klientów</span></h2>
+                <p class="reviews-subtitle">Każda opinia pochodzi od klientów, którzy dokonali zakupu.</p>
+            </div>
+
+            <div class="reviews-filters">
+                <button class="review-filter active" data-sort="newest" onclick="sortReviews('newest', this)">Najnowsze</button>
+                <button class="review-filter" data-sort="oldest" onclick="sortReviews('oldest', this)">Najstarsze</button>
+                <button class="review-filter" data-sort="highest" onclick="sortReviews('highest', this)">Najwyższa ocena</button>
+                <button class="review-filter" data-sort="lowest" onclick="sortReviews('lowest', this)">Najniższa ocena</button>
+            </div>
+
+            <div class="reviews-grid" id="reviews-grid"></div>
+        </section>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="page" id="support-page" style="display:none;">
+        <section class="support-section">
+            <h2 class="section-title">Support</h2>
+            <div class="support-content">
+                <div class="support-card"><div class="support-icon">📧</div><h3>Email</h3><p>support@nexusmarket.pl</p></div>
+                <div class="support-card"><div class="support-icon">💬</div><h3>Czat na żywo</h3><p>9:00-21:00</p></div>
+                <div class="support-card"><div class="support-icon">📞</div><h3>Telefon</h3><p>+48 123 456 789</p></div>
+            </div>
+            <div style="text-align:center;margin-top:30px;">
+                <button class="hero-btn" onclick="toggleTicketForm()">Utwórz ticket</button>
+            </div>
+            <div class="ticket-section" id="ticket-section" style="display:none;">
+                <h3 class="ticket-title">Utwórz ticket</h3>
+                <form id="ticket-form">
+                    <input type="text" id="ticket-name" placeholder="Twoje imię i nazwisko" required>
+                    <input type="email" id="ticket-email" placeholder="Twój email" required>
+                    <select id="ticket-category" required>
+                        <option value="">Wybierz kategorię...</option>
+                        <option value="Zwrot">Zwrot</option>
+                        <option value="Kontakt">Kontakt</option>
+                        <option value="Problem z zamówieniem">Problem z zamówieniem</option>
+                        <option value="Problem z kontem">Problem z kontem</option>
+                        <option value="Inne">Inne</option>
+                    </select>
+                    <textarea id="ticket-message" placeholder="Opisz swój problem..." rows="5" required></textarea>
+                    <button type="submit" class="submit-btn">Wyślij ticket</button>
+                </form>
+            </div>
+            <div class="my-tickets-section" id="my-tickets-section" style="display:none;">
+                <h3 class="ticket-title">Moje tickety</h3>
+                <div class="my-tickets-list" id="my-tickets-list"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SZCZEGÓŁY PRODUKTU -->
+    <div class="page" id="product-page" style="display:none;">
+        <section class="product-detail-section">
+            <button class="back-to-shop" onclick="showPage('products')">← Wróć do sklepu</button>
+            <div class="product-detail">
+                <div class="product-detail-left">
+                    <img id="product-detail-image" src="" alt="" class="product-detail-img">
+                </div>
+                <div class="product-detail-right">
+                    <h2 class="product-detail-name" id="product-detail-name"></h2>
+                    <p class="product-detail-price" id="product-detail-price"></p>
+                    <p class="product-detail-short" id="product-detail-short"></p>
+                    <div class="product-detail-availability"><span class="green-dot"></span> Dostępny</div>
+                    <div class="product-detail-actions">
+                        <button class="add-to-cart-detail" onclick="addToCartFromDetail()">Dodaj do koszyka</button>
+                        <button class="buy-now-btn" onclick="buyNow()">Kup teraz</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-detail-bottom">
+                <div class="product-detail-features" id="product-detail-features"></div>
+                <div class="product-detail-specs">
+                    <h3>Specyfikacja</h3>
+                    <table id="product-detail-specs-table"></table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- KONTO -->
+    <div class="page" id="account-page" style="display:none;">
+        <section class="account-section">
+            <h2 class="section-title">Moje konto</h2>
+            <div class="account-info">
+                <p>Zalogowany jako: <strong id="account-login"></strong></p>
+                <p>Rola: <strong id="account-role"></strong></p>
+            </div>
+            <div class="account-stats">
+                <div class="stat-card"><span>Zamówienia</span><strong id="account-orders-count">0</strong></div>
+                <div class="stat-card"><span>Wydano</span><strong id="account-total-spent">0.00 zł</strong></div>
+            </div>
+            <div class="account-history"><h3>Historia zamówień</h3><div id="account-orders"></div></div>
+            <div class="account-tickets">
+                <h3>Moje zgłoszenia</h3>
+                <div id="account-tickets-list"></div>
+            </div>
+            <button class="logout-btn" onclick="logout()">Wyloguj</button>
+        </section>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="page" id="admin-page" style="display:none;">
+        <div class="admin-main">
+            <div class="admin-header">
+                <h2 class="admin-title">Panel Administratora</h2>
+                <button class="logout-btn" onclick="logout()">Wyloguj</button>
+            </div>
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('orders')">Zamówienia</button>
+                <button class="admin-tab" onclick="switchAdminTab('logs')">Logi</button>
+                <button class="admin-tab" onclick="switchAdminTab('products')">Produkty</button>
+                <button class="admin-tab" onclick="switchAdminTab('stats')">Statystyki</button>
+                <button class="admin-tab" onclick="switchAdminTab('users')">Użytkownicy</button>
+                <button class="admin-tab" onclick="switchAdminTab('keys')">Klucze</button>
+                <button class="admin-tab" onclick="switchAdminTab('tickets')">Tickety <span id="tickets-count" class="tickets-badge" style="display:none;">0</span></button>
+            </div>
+            
+            <div class="admin-tab-content" id="admin-tab-orders">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Zamówienia</h2>
+                    <button class="danger-btn" onclick="clearOrders()">Wyczyść zamówienia</button>
+                    <div class="orders-list" id="orders-list"></div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-logs" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Logi aktywności</h2>
+                    <div class="logs-buttons">
+                        <button class="danger-btn" onclick="clearLogs()">Wyczyść logi</button>
+                        <button class="save-btn" onclick="exportLogs()">Zapisz logi</button>
+                    </div>
+                    <div class="logs-table-container">
+                        <table class="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>IP</th>
+                                    <th>Urządzenie</th>
+                                    <th>Przeglądarka</th>
+                                    <th>Strona</th>
+                                    <th>Akcja</th>
+                                    <th>Status</th>
+                                    <th>Miejscowość</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logs-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-products" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Produkty</h2>
+                    <div class="admin-form">
+    <h3>Dodaj nowy produkt</h3>
+    <input type="text" id="admin-name" placeholder="Nazwa produktu">
+    <input type="number" id="admin-price" placeholder="Cena (zł)" step="0.01">
+    <input type="text" id="admin-image" placeholder="URL zdjęcia">
+    <input type="number" id="admin-stock" placeholder="Stan magazynowy" min="0">
+    <textarea id="admin-description" placeholder="Opis produktu" rows="2" style="padding:14px;background:rgba(255,255,255,0.02);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);font-size:14px;resize:vertical;width:100%;"></textarea>
+    <input type="text" id="admin-features" placeholder="Najważniejsze cechy (oddziel przecinkiem, np. 4K, HDR, Dolby Atmos)">
+    <input type="text" id="admin-specs" placeholder="Specyfikacja (klucz:wartość, oddziel przecinkiem, np. Rozdzielczość:4K, Dźwięk:Dolby)">
+    <button class="admin-btn" onclick="addProduct()">Dodaj produkt</button>
+</div>
+                    <div class="admin-list" id="admin-list"></div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-stats" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Statystyki sprzedaży</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card"><span>Łączna sprzedaż</span><strong id="stats-total-revenue">0.00 zł</strong></div>
+                        <div class="stat-card"><span>Liczba zamówień</span><strong id="stats-total-orders">0</strong></div>
+                        <div class="stat-card"><span>Dzisiejsze zamówienia</span><strong id="stats-today-orders">0</strong></div>
+                        <div class="stat-card"><span>Liczba użytkowników</span><strong id="stats-total-users">0</strong></div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sales-chart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-users" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Użytkownicy</h2>
+                    <div class="users-list" id="users-list"></div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-keys" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title">Wydane klucze</h2>
+                    <div class="keys-list" id="keys-list"></div>
+                </section>
+            </div>
+
+            <div class="admin-tab-content" id="admin-tab-tickets" style="display:none;">
+                <section class="admin-section">
+                    <div class="ticket-tool-header">
+                        <h2 class="admin-section-title">System zgłoszeń</h2>
+                        <div class="ticket-tool-stats">
+                            <span class="ticket-stat open">Otwarte: <strong id="tickets-open-count">0</strong></span>
+                            <span class="ticket-stat progress">W trakcie: <strong id="tickets-progress-count">0</strong></span>
+                            <span class="ticket-stat closed">Zamknięte: <strong id="tickets-closed-count">0</strong></span>
+                        </div>
+                    </div>
+                    <div class="ticket-tool-filters">
+                        <button class="ticket-filter active" onclick="filterTickets('all', this)">Wszystkie</button>
+                        <button class="ticket-filter" onclick="filterTickets('Otwarty', this)">Otwarte</button>
+                        <button class="ticket-filter" onclick="filterTickets('W trakcie', this)">W trakcie</button>
+                        <button class="ticket-filter" onclick="filterTickets('Odpowiedziano', this)">Odpowiedziano</button>
+                        <button class="ticket-filter" onclick="filterTickets('Zamknięty', this)">Zamknięte</button>
+                        <button class="ticket-filter archive" onclick="loadArchivedTicketsAdmin()">Archiwum</button>
+                    </div>
+                    <div class="ticket-tool-list" id="tickets-list"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ KOSZYK ============ -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2>Koszyk <span class="cart-count-badge" id="cart-count-header">0</span></h2>
+            <button class="close-btn" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <span class="label">Subtotal</span>
+                <span class="total"><span id="cart-total">0.00</span> zł</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Złóż zamówienie</button>
+            <div class="cart-footer-actions">
+                <button class="view-cart-btn" onclick="showCartPage()">Zobacz stronę koszyka</button>
+                <button class="clear-cart-btn" onclick="clearCart()">Wyczyść koszyk</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MODALE ============ -->
+    <!-- LOGOWANIE -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2>Logowanie</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Login" required>
+                <input type="password" id="login-password" placeholder="Hasło" required>
+                <div class="login-error" id="login-error" style="display:none;">Błędny login lub hasło</div>
+                <button type="submit" class="submit-btn">Zaloguj</button>
+                <button type="button" class="close-modal-btn" onclick="closeLogin()">Anuluj</button>
+            </form>
+            <p style="text-align:center;margin-top:15px;color:rgba(255,255,255,0.5);">
+                Nie masz konta? <a href="#" onclick="switchToRegister()" style="color:#3b82f6;">Zarejestruj się</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- REJESTRACJA -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <h2>Rejestracja</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Nazwa użytkownika" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Hasło (min. 6 znaków)" required>
+                <div class="login-error" id="register-error" style="display:none;">Błąd rejestracji</div>
+                <button type="submit" class="submit-btn">Załóż konto</button>
+                <button type="button" class="close-modal-btn" onclick="closeRegister()">Anuluj</button>
+            </form>
+            <p style="text-align:center;margin-top:15px;color:rgba(255,255,255,0.5);">
+                Masz konto? <a href="#" onclick="switchToLogin()" style="color:#3b82f6;">Zaloguj się</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ZAMÓWIENIE - DANE -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Dane zamówienia</h2>
+                <button class="close-modal-btn" onclick="closeOrder()">✕</button>
+            </div>
+            <form id="order-form">
+                <input type="text" id="order-name" placeholder="Imię i nazwisko" required>
+                <input type="email" id="order-email" placeholder="Email" required>
+                <input type="text" id="order-address" placeholder="Adres email do wysyłki" required>
+                <button type="button" class="submit-btn" onclick="goToSummary()">Dalej</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PODSUMOWANIE -->
+    <div class="modal" id="summary-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Podsumowanie zamówienia</h2>
+                <button class="close-modal-btn" onclick="closeSummary()">✕</button>
+            </div>
+            <div id="summary-items"></div>
+            <div class="discount-section">
+                <input type="text" id="discount-code" placeholder="Kod rabatowy">
+                <button class="discount-btn" onclick="applyDiscount()">Zastosuj</button>
+                <div id="discount-message"></div>
+            </div>
+            <div class="summary-total">Suma: <span id="summary-total">0.00 zł</span></div>
+            <div class="summary-actions">
+                <button class="back-btn" onclick="backToForm()">Wstecz</button>
+                <button class="pay-btn" onclick="processPayment()">Zapłać</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUKCES -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h2>Dziękujemy za zakup!</h2>
+            <p class="success-text">Twoje zamówienie zostało przyjęte.</p>
+            <div class="license-box"><span>Twój klucz:</span><strong id="license-key">XXXX-XXXX-XXXX-XXXX</strong></div>
+            <p class="success-email">Dane dostępowe wysłano na podany adres email.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:15px;">
+                <button class="submit-btn" onclick="closeSuccess()">Zamknij</button>
+                <button class="review-btn" onclick="openReviewForm()">Dodaj opinię</button>
+            </div>
+            <div id="review-form-container" style="display:none; margin-top:20px;">
+                <textarea id="review-text" placeholder="Twoja opinia..." rows="3"></textarea>
+                <div class="star-rating" id="star-rating">
+                    <span onclick="setRating(1)">★</span>
+                    <span onclick="setRating(2)">★</span>
+                    <span onclick="setRating(3)">★</span>
+                    <span onclick="setRating(4)">★</span>
+                    <span onclick="setRating(5)">★</span>
+                </div>
+                <button class="submit-btn" onclick="submitReview()">Wyślij opinię</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDYTUJ PRODUKT -->
+   <div class="modal" id="edit-product-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edytuj produkt</h2>
+            <button class="close-modal-btn" onclick="closeEditProductModal()">✕</button>
+        </div>
+        <form id="edit-product-form">
+            <input type="text" id="edit-name" placeholder="Nazwa produktu" required>
+            <input type="number" id="edit-price" placeholder="Cena (zł)" step="0.01" required>
+            <input type="text" id="edit-image" placeholder="URL zdjęcia">
+            <input type="number" id="edit-stock" placeholder="Stan magazynowy" min="0" required>
+            <textarea id="edit-description" placeholder="Opis produktu" rows="2" style="padding:14px;background:rgba(255,255,255,0.02);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);font-size:14px;resize:vertical;width:100%;"></textarea>
+            <input type="text" id="edit-features" placeholder="Najważniejsze cechy (oddziel przecinkiem)">
+            <input type="text" id="edit-specs" placeholder="Specyfikacja (klucz:wartość, oddziel przecinkiem)">
+            <button type="submit" class="submit-btn">Zapisz zmiany</button>
+        </form>
+    </div>
+</div>
+
+    <!-- POTWIERDZENIE -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <h2 id="confirm-title">Potwierdzenie</h2>
+            <p id="confirm-message" class="success-text">Czy na pewno chcesz to zrobić?</p>
+            <div class="summary-actions">
+                <button class="back-btn" onclick="closeConfirmModal()">Anuluj</button>
+                <button class="pay-btn" onclick="confirmYes()">Tak, potwierdzam</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CZAT TICKET -->
+    <div class="modal" id="ticket-view-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="ticket-view-title">Zgłoszenie</h2>
+                <button class="close-modal-btn" onclick="closeTicketViewModal()">✕</button>
+            </div>
+            <div class="ticket-view-messages" id="ticket-view-content"></div>
+            <div class="ticket-reply-section">
+                <textarea id="ticket-reply-text" placeholder="Napisz odpowiedź..." rows="3"></textarea>
+                <button class="submit-btn" onclick="sendUserReplyRealTime(currentViewingTicketId)">Wyślij odpowiedź</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ STOPKA ============ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NEXUS<span>MARKET</span></div>
+            <div class="footer-links">
+                <a href="#" onclick="showPage('home')">Strona główna</a>
+                <a href="#" onclick="showPage('products')">Produkty</a>
+                <a href="#" onclick="showPage('reviews')">Opinie</a>
+                <a href="#" onclick="showPage('support')">Kontakt</a>
+                <a href="#">Regulamin</a>
+                <a href="#">Polityka prywatności</a>
+            </div>
+            <div class="footer-copy">© 2025 NEXUS MARKET. Wszelkie prawa zastrzeżone.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
