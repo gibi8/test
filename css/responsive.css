@@ -1,0 +1,145 @@
+/* ============================================
+   RESPONSYWNOŚĆ - GLOBALNE MEDIA QUERIES
+   ============================================ */
+
+@media (max-width: 992px) {
+    .nm-home-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .nm-hero-copy {
+        padding-left: 0;
+    }
+    .nm-hero-actions {
+        justify-content: center;
+    }
+    .nm-trust {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nm-nav-links {
+        display: none !important;
+    }
+    .nm-hero-copy h1 {
+        font-size: 32px !important;
+    }
+    .nm-hero-visual {
+        display: none;
+    }
+    .nm-benefits {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .products-container {
+        flex-direction: column;
+    }
+    .products-filters {
+        width: 100%;
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .products-filters .filter-group {
+        margin-bottom: 0;
+    }
+    .products-filters .filter-actions {
+        grid-column: 1 / -1;
+    }
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .nm-navbar {
+        height: 56px !important;
+        margin: 8px 8px 0 !important;
+        padding: 0 12px !important;
+        border-radius: 14px !important;
+        width: calc(100% - 16px) !important;
+        top: 8px !important;
+    }
+    .nm-logo {
+        font-size: 14px !important;
+        gap: 6px !important;
+    }
+    .nm-logo-mark {
+        font-size: 22px !important;
+    }
+    .nm-account {
+        padding: 6px 10px !important;
+        font-size: 10px !important;
+        border-radius: 12px !important;
+    }
+    .nm-cart span {
+        font-size: 8px !important;
+        padding: 2px 4px !important;
+        top: -8px !important;
+        right: -8px !important;
+    }
+    .nm-hero-copy h1 {
+        font-size: 24px !important;
+    }
+    .nm-hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nm-benefits {
+        grid-template-columns: 1fr;
+    }
+    .nm-benefits>div {
+        border-right: 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .nm-benefits>div:last-child {
+        border-bottom: 0;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .products-filters {
+        grid-template-columns: 1fr;
+    }
+    .products-title {
+        font-size: 28px;
+    }
+    .product-card .product-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .product-card .product-actions {
+        justify-content: center;
+    }
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+    .reviews-title {
+        font-size: 28px;
+    }
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-links {
+        justify-content: center;
+    }
+    .modal-content {
+        padding: 25px 20px;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cart-page-section {
+        padding: 20px 0 40px;
+    }
+    .cart-page-title {
+        font-size: 28px;
+    }
+}

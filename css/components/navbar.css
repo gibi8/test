@@ -1,0 +1,213 @@
+/* ============================================
+   NAVBAR - WYSPA NA GÓRZE
+   ============================================ */
+
+.nm-navbar {
+    height: 76px !important;
+    margin: 16px 22px 0 !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 20px !important;
+    background: rgba(7, 11, 18, 0.92) !important;
+    backdrop-filter: blur(18px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 25px !important;
+    position: sticky !important;
+    top: 16px !important;
+    z-index: 100 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 45px rgba(59, 130, 246, 0.03) !important;
+    width: calc(100% - 44px) !important;
+    max-width: 1400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.nm-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-size: 21px !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    min-width: 200px !important;
+}
+
+.nm-logo span span {
+    color: var(--primary) !important;
+}
+
+.nm-logo-mark {
+    font-size: 37px !important;
+    font-weight: 900 !important;
+    color: var(--primary) !important;
+    text-shadow: 0 0 25px rgba(59, 130, 246, 0.15) !important;
+}
+
+.nm-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    justify-content: center;
+}
+
+.nm-nav-link {
+    color: var(--text-secondary) !important;
+    text-decoration: none !important;
+    padding: 13px 18px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .25s;
+    position: relative;
+    cursor: pointer;
+}
+
+.nm-nav-link:hover, .nm-nav-link.active {
+    color: var(--text-primary) !important;
+    background: rgba(59, 130, 246, 0.06);
+    box-shadow: 0 3px 22px rgba(59, 130, 246, 0.04);
+}
+
+.nm-nav-link.active:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    left: 22px;
+    right: 22px;
+    bottom: 2px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.15);
+}
+
+.nm-nav-link:hover:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    left: 22px;
+    right: 22px;
+    bottom: 2px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+    opacity: 0.5;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.08);
+}
+
+.nm-nav-link::before {
+    display: none !important;
+}
+
+.nm-nav-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    min-width: 200px !important;
+    justify-content: flex-end !important;
+}
+
+.nm-search-btn {
+    background: none;
+    border: 0;
+    color: var(--text-primary);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.nm-cart {
+    position: relative !important;
+    cursor: pointer !important;
+    font-size: 20px !important;
+}
+
+.nm-cart span {
+    position: absolute !important;
+    top: -10px !important;
+    right: -10px !important;
+    background: var(--primary) !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    font-size: 10px !important;
+    padding: 4px 6px !important;
+}
+
+.nm-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border-color);
+}
+
+.nm-account {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 22px !important;
+    padding: 11px 17px !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-size: 13px !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nm-account:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.06) !important;
+}
+
+@media (max-width: 768px) {
+    .nm-navbar {
+        height: 64px !important;
+        margin: 12px 12px 0 !important;
+        padding: 0 16px !important;
+        border-radius: 16px !important;
+        width: calc(100% - 24px) !important;
+        top: 12px !important;
+    }
+    .nm-logo { font-size: 17px !important; min-width: auto !important; gap: 8px !important; }
+    .nm-logo-mark { font-size: 28px !important; }
+    .nm-nav-links { display: none !important; }
+    .nm-nav-actions { min-width: auto !important; gap: 10px !important; }
+    .nm-account { padding: 8px 12px !important; font-size: 11px !important; border-radius: 16px !important; }
+    .nm-search-btn { font-size: 22px !important; }
+    .nm-cart { font-size: 17px !important; }
+    .nm-divider { height: 24px !important; }
+}
+
+@media (max-width: 480px) {
+    .nm-navbar {
+        height: 56px !important;
+        margin: 8px 8px 0 !important;
+        padding: 0 12px !important;
+        border-radius: 14px !important;
+        width: calc(100% - 16px) !important;
+        top: 8px !important;
+    }
+    .nm-logo { font-size: 14px !important; gap: 6px !important; }
+    .nm-logo-mark { font-size: 22px !important; }
+    .nm-account { padding: 6px 10px !important; font-size: 10px !important; border-radius: 12px !important; }
+    .nm-cart span { font-size: 8px !important; padding: 2px 4px !important; top: -8px !important; right: -8px !important; }
+}
+/* ===== LOGO W NAVBAR ===== */
+.nav-logo-img {
+    height: 70px;
+    width: auto;
+    filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.nav-logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSYWNOŚĆ ===== */
+@media (max-width: 768px) {
+    .nav-logo-img {
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo-img {
+        height: 24px;
+    }
+}
