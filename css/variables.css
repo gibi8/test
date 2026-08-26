@@ -1,0 +1,46 @@
+/* ============================================
+   ZMIENNE GLOBALNE - KOLORY, FONTY
+   ============================================ */
+
+:root {
+    /* ===== KOLORY GŁÓWNE ===== */
+    --bg-primary: #05080f;
+    --bg-secondary: #0a0f18;
+    --bg-card: #0c121c;
+    --bg-surface: #0d141f;
+    --bg-dark: #070b12;
+    
+    /* ===== BORDERY ===== */
+    --border-color: #172a45;
+    --border-light: #1b3150;
+    --border-hover: #2563eb;
+    
+    /* ===== KOLORY AKCENTU ===== */
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+    
+    /* ===== TEKST ===== */
+    --text-primary: #f1f5f9;
+    --text-secondary: #7f8da3;
+    --text-muted: #4a5a72;
+    
+    /* ===== STATUSY ===== */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    
+    /* ===== GLOW ===== */
+    --glow-blue: rgba(59, 130, 246, 0.08);
+    --glow-blue-strong: rgba(59, 130, 246, 0.15);
+    
+    /* ===== FONTY ===== */
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* ===== ZAOKRĄGLENIA ===== */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+}

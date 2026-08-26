@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="icon" type="images/png" href="assets/images/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>NEXUS MARKET </title>
+    
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components/preloader.css">
+    <link rel="stylesheet" href="css/components/navbar.css">
+    <link rel="stylesheet" href="css/components/home.css">
+    <link rel="stylesheet" href="css/components/products.css">
+    <link rel="stylesheet" href="css/components/cart.css">
+    <link rel="stylesheet" href="css/components/cart-page.css">
+    <link rel="stylesheet" href="css/components/reviews.css">
+    <link rel="stylesheet" href="css/components/support.css">
+    <link rel="stylesheet" href="css/components/tickets.css">
+    <link rel="stylesheet" href="css/components/admin.css">
+    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="css/components/account.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- ===== FIREBASE ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    
+    <!-- ===== CHART.JS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- ===== EMAILJS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- ===== JS - KONFIGURACJA ===== -->
+    <script src="js/config/firebase.js"></script>
+    <script src="js/config/constants.js"></script>
+    <script src="js/config/translations.js"></script>
+    
+    <!-- ===== JS - UTILS ===== -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/validators.js"></script>
+    <script src="js/utils/stars.js"></script>
+    
+     <!-- ===== JS - SERVICES ===== -->
+    <script src="js/services/auth.js"></script>
+    <script src="js/services/products.js"></script>
+    <script src="js/services/cart.js"></script>
+    <script src="js/services/orders.js"></script>
+    <script src="js/services/tickets.js"></script>
+    <script src="js/services/reviews.js"></script>
+    <script src="js/services/users.js"></script>
+    <script src="js/services/admin.js"></script>
+
+    <!-- ===== JS - UI ===== -->
+    <script src="js/ui/notifications.js"></script>
+    <script src="js/ui/render.js"></script>
+    <script src="js/ui/products-ui.js"></script>
+    <script src="js/ui/cart-ui.js"></script>
+    <script src="js/ui/tickets-ui.js"></script>
+    
+    <script src="js/ui/account-ui.js"></script>
+    
+    <!-- ===== JS - MAIN ===== -->
+    <script src="js/main.js"></script>
+</head>
+<body>
+
+    <!-- ============ PRELOADER ============ -->
+    <div class="preloader-full" id="preloader-full">
+        <div class="preloader-ring">
+            <div class="preloader-ring-spinner"></div>
+            <div class="preloader-logo">NEXUS<span>MARKET</span></div>
+        </div>
+        <div class="preloader-progress-bar">
+            <div class="preloader-progress-fill" id="preloader-progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- ============ GWIAZDY ============ -->
+    <canvas id="stars-canvas"></canvas>
+
+        <!-- ============ TOP MARQUEE ============ -->
+    <div class="top-marquee">
+        <div class="marquee-track" id="marquee-track">
+            <span class="marquee-text" data-i18n-marquee="marquee">
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+                ⚡ NATYCHMIASTOWA DOSTAWA • 🔐 BEZPIECZNE PŁATNOŚCI • 💎 PRODUKTY PREMIUM • 🚀 BŁYSKAWICZNA AKTYWACJA • 🔥 NAJLEPSZE CENY • &nbsp;
+            </span>
+        </div>
+    </div>
+
+    <!-- ============ NAVBAR ============ -->
+    <nav class="navbar nm-navbar">
+        <div class="nav-logo nm-logo" onclick="showPage('home')">
+            <img src="assets/images/logo-big.png" alt="NEXUS" class="nav-logo-img">
+            <span>NEXUS<span>MARKET</span></span>
+        </div>
+        <div class="nm-nav-links">
+            <a href="#" class="nm-nav-link active" data-page="home" onclick="showPage('home'); return false;" data-i18n="nav_home">HOME</a>
+            <a href="#" class="nm-nav-link" data-page="products" onclick="showPage('products'); return false;" data-i18n="nav_products">PRODUCTS</a>
+            <a href="#" class="nm-nav-link" data-page="reviews" onclick="showPage('reviews'); return false;" data-i18n="nav_reviews">REVIEWS</a>
+            <a href="#" class="nm-nav-link" data-page="support" onclick="showPage('support'); return false;" data-i18n="nav_support">SUPPORT</a>
+        </div>
+        <div class="nav-actions nm-nav-actions">
+            <button class="nm-search-btn" onclick="openProductSearch()" aria-label="Szukaj">⌕</button>
+            <div class="nav-cart nm-cart" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+            <span class="nm-divider"></span>
+            <!-- ===== LANGUAGE SWITCHER ===== -->
+            <div class="lang-switcher" id="lang-switcher">
+                <button class="lang-btn active" data-lang="pl" onclick="switchLanguage('pl')">
+                    <span class="flag">🇵🇱</span> PL
+                </button>
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">
+                    <span class="flag">🇬🇧</span> EN
+                </button>
+            </div>
+            <span class="nm-divider"></span>
+            <button class="nav-login nm-account" id="login-btn" onclick="handleLoginClick()" data-i18n="nav_login">MOJE KONTO⌄</button>
+        </div>
+    </nav>
+
+    <!-- ============ STRONY ============ -->
+    
+    <!-- HOME -->
+    <div class="page page-visible" id="home-page">
+        <section class="nm-home-hero">
+            <div class="nm-hero-copy">
+                <div class="nm-kicker" data-i18n="home_kicker">NEXUS MARKET</div>
+                <h1 data-i18n-html="home_title">Twoje ulubione<br><span style="color:var(--primary)">subskrypcje.</span><br>W jednym miejscu.</h1>
+                <p data-i18n="home_subtitle">Najlepsze konta premium w najniższych cenach.<br>Szybko, bezpiecznie i bez zbędnych formalności.</p>
+                <div class="nm-hero-actions">
+                    <button class="nm-primary" onclick="showPage('products')" data-i18n="home_btn_offer">Zobacz ofertę <b>→</b></button>
+                    <button class="nm-secondary" onclick="document.getElementById('nm-how').scrollIntoView({behavior:'smooth'})" data-i18n="home_btn_how">▷ &nbsp; Jak to działa?</button>
+                </div>
+                
+            </div>
+            <div class="nm-hero-visual">
+                <div class="nm-orbit-glow"></div>
+                <div class="nm-orbit-ring ring-a"></div>
+                <div class="nm-orbit-ring ring-b"></div>
+                <img src="assets/images/logo.png" alt="NEXUS Logo" class="nm-logo-img">
+            </div>
+        </section>
+
+        <section class="nm-benefits" id="nm-how">
+            <div><strong>ϟ</strong><span><b data-i18n="benefit_delivery">Natychmiastowa dostawa</b><small data-i18n="benefit_delivery_desc">Otrzymujesz dostęp nawet w 5 minut po płatności.</small></span></div>
+            <div><strong>♢</strong><span><b data-i18n="benefit_guarantee">Gwarancja działania</b><small data-i18n="benefit_guarantee_desc">Wymiana konta lub zwrot pieniędzy w razie problemów.</small></span></div>
+            <div><strong>♧</strong><span><b data-i18n="benefit_support">Wsparcie 24/7</b><small data-i18n="benefit_support_desc">Nasz zespół jest zawsze gotowy do pomocy.</small></span></div>
+            <div><strong>♙</strong><span><b data-i18n="benefit_secure">Bezpieczne płatności</b><small data-i18n="benefit_secure_desc">Szyfrowane transakcje i ochrona Twoich danych.</small></span></div>
+        </section>
+    </div>
+
+    <!-- PRODUKTY -->
+    <div class="page" id="products-page" style="display:none;">
+        <section class="products-section">
+            <div class="products-header">
+                <h1 class="products-title" data-i18n-html="products_title">Wszystkie <span style="color:var(--primary)">produkty</span></h1>
+                <p class="products-subtitle" data-i18n="products_subtitle">Przeglądaj pełną ofertę i wybierz najlepszą subskrypcję.</p>
+            </div>
+            <div class="products-container">
+                <aside class="products-filters">
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="filter_search">SZUKAJ</label>
+                        <input type="text" id="filter-search" placeholder="Szukaj produktów..." class="filter-input" oninput="applyFilters()" data-i18n="filter_search_placeholder">
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label" data-i18n="filter_price">CENA (zł)</label>
+                        <div class="filter-price-row">
+                            <input type="number" id="filter-min" placeholder="Min" class="filter-input filter-price" min="0" oninput="updatePriceFromInput()" data-i18n="filter_min">
+                            <span class="filter-price-sep">—</span>
+                            <input type="number" id="filter-max" placeholder="Max" class="filter-input filter-price" min="0" oninput="updatePriceFromInput()" data-i18n="filter_max">
+                        </div>
+                        <div class="filter-price-sliders">
+                            <div class="filter-price-row">
+                                <span class="filter-price-label"><span id="filter-min-display">0</span> zł</span>
+                                <input type="range" id="filter-min-range" min="0" max="200" value="0" step="1" oninput="updatePriceRange()">
+                            </div>
+                            <div class="filter-price-row">
+                                <span class="filter-price-label"><span id="filter-max-display">200</span> zł</span>
+                                <input type="range" id="filter-max-range" min="0" max="200" value="200" step="1" oninput="updatePriceRange()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group filter-checkbox">
+                        <label class="filter-checkbox-label">
+                            <input type="checkbox" id="filter-instock" onchange="applyFilters()">
+                            <span class="filter-checkbox-custom"></span>
+                            <span data-i18n="filter_in_stock">Tylko dostępne</span>
+                        </label>
+                    </div>
+                    <div class="filter-actions">
+                        <button class="filter-apply-btn" onclick="applyFilters()" data-i18n="filter_apply">Zastosuj filtry</button>
+                        <button class="filter-reset-btn" onclick="resetFilters()" data-i18n="filter_reset">Resetuj filtry</button>
+                    </div>
+                </aside>
+                <div class="products-main">
+                    <div class="products-toolbar">
+                        <span class="products-count" id="products-count">0 produktów</span>
+                        <div class="products-view-options">
+                            <button class="view-btn active" onclick="setView('grid')" title="Siatka">▦</button>
+                            <button class="view-btn" onclick="setView('list')" title="Lista">☰</button>
+                        </div>
+                    </div>
+                    <div class="products-grid" id="products"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CART PAGE -->
+    <div class="page" id="cart-page" style="display:none;">
+        <section class="cart-page-section">
+            <div class="cart-page-header">
+                <h1 class="cart-page-title" data-i18n-html="cart_page_title">Twój <span style="color:var(--primary)">koszyk</span></h1>
+                <p class="cart-page-subtitle" data-i18n="cart_page_subtitle">Przejrzyj produkty przed złożeniem zamówienia.</p>
+            </div>
+            <div class="cart-page-container">
+                <div class="cart-page-products" id="cart-page-products"></div>
+                <div class="cart-page-summary">
+                    <div class="summary-card">
+                        <h3 class="summary-title" data-i18n="cart_page_summary">Podsumowanie</h3>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span class="summary-label" data-i18n="cart_subtotal">Subtotal</span>
+                            <span class="summary-value" id="cart-page-total">0.00 zł</span>
+                        </div>
+                        <p class="summary-note" data-i18n="cart_page_note">Podatki i opłaty są obliczane przy kasie.</p>
+                        <div class="summary-verified">
+                            <span class="verified-icon">✓</span>
+                            <span data-i18n="cart_page_verified">Zweryfikowano</span>
+                        </div>
+                        <button class="summary-checkout-btn" onclick="checkout()" data-i18n="cart_checkout">Złóż zamówienie</button>
+                        <button class="summary-clear-btn" onclick="clearCart()" data-i18n="cart_clear">Wyczyść koszyk</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="page" id="reviews-page" style="display:none;">
+        <section class="reviews-section">
+            <div class="reviews-header">
+                <div class="reviews-badge">Ocena 4.99 na 5</div>
+                <h2 class="reviews-title" data-i18n-html="reviews_title">Opinie <span style="color:var(--primary)">klientów</span></h2>
+                <p class="reviews-subtitle" data-i18n="reviews_subtitle">Każda opinia pochodzi od klientów, którzy dokonali zakupu.</p>
+            </div>
+            <div class="reviews-filters">
+                <button class="review-filter active" data-sort="newest" onclick="sortReviews('newest', this)" data-i18n="reviews_newest">Najnowsze</button>
+                <button class="review-filter" data-sort="oldest" onclick="sortReviews('oldest', this)" data-i18n="reviews_oldest">Najstarsze</button>
+                <button class="review-filter" data-sort="highest" onclick="sortReviews('highest', this)" data-i18n="reviews_highest">Najwyższa ocena</button>
+                <button class="review-filter" data-sort="lowest" onclick="sortReviews('lowest', this)" data-i18n="reviews_lowest">Najniższa ocena</button>
+            </div>
+            <div class="reviews-grid" id="reviews-grid"></div>
+        </section>
+    </div>
+
+    <!-- ===== SUPPORT ===== -->
+    <div class="page" id="support-page" style="display:none;">
+        <section class="support-section">
+
+            <!-- ===== NAGŁÓWEK ===== -->
+            <div class="support-header">
+                <h1 class="support-title" data-i18n-html="support_title">Potrzebujesz <span style="color:var(--primary)">pomocy?</span></h1>
+                <p class="support-subtitle" data-i18n="support_subtitle">Jesteśmy tutaj, żeby Ci pomóc.</p>
+                <p class="support-desc" data-i18n="support_desc">Wybierz wygodny sposób kontaktu lub sprawdź swoje zgłoszenia.</p>
+            </div>
+
+            <!-- ===== KARTY KONTAKTU ===== -->
+            <div class="support-cards">
+                <!-- EMAIL -->
+                <div class="support-card">
+                    <div class="support-card-icon">✉</div>
+                    <h3 data-i18n="support_email">E-mail</h3>
+                    <p data-i18n="support_email_desc">Napisz do nas, odpowiemy do 24h.</p>
+                    <a href="mailto:support@nexusmarket.pl" class="support-card-link">support@nexusmarket.pl</a>
+                </div>
+
+                <!-- CZAT -->
+                <div class="support-card">
+                    <div class="support-card-icon">💬</div>
+                    <h3 data-i18n="support_chat">Czat na żywo</h3>
+                    <p data-i18n="support_chat_desc">Dostępny w godzinach 9:00–21:00.</p>
+                    <span class="support-card-status online" data-i18n="support_chat_online">● Online</span>
+                </div>
+
+                <!-- TICKETY -->
+                <div class="support-card">
+                    <div class="support-card-icon">🎫</div>
+                    <h3 data-i18n="support_tickets">Centrum zgłoszeń</h3>
+                    <p data-i18n="support_tickets_desc">Utwórz zgłoszenie i śledź jego status.</p>
+                    <span class="support-card-time" data-i18n="support_tickets_time">Średni czas odpowiedzi: 2–6h</span>
+                </div>
+            </div>
+
+            <!-- ===== PRZYCISK UTWÓRZ TICKET ===== -->
+            <div class="support-ticket-btn-wrap">
+                <button class="support-ticket-btn" id="support-open-ticket-modal" data-i18n="support_create">+ Utwórz nowe zgłoszenie</button>
+            </div>
+
+            <!-- ===== FORMULARZ TICKET ===== -->
+            <div class="ticket-section" id="ticket-section" style="display:none;">
+                <h3 class="ticket-title" data-i18n="support_ticket_form_title">Utwórz nowe zgłoszenie</h3>
+                <form id="ticket-form">
+                    <input type="text" id="ticket-name" placeholder="Twoje imię i nazwisko" required data-i18n="ticket_name">
+                    <input type="email" id="ticket-email" placeholder="Twój email" required data-i18n="ticket_email">
+                    <select id="ticket-category" required>
+                        <option value="" data-i18n="ticket_category">Wybierz kategorię...</option>
+                        <option value="Problem z kontem" data-i18n="ticket_cat_account">Problem z kontem</option>
+                        <option value="Zamówienie" data-i18n="ticket_cat_order">Zamówienie</option>
+                        <option value="Płatność" data-i18n="ticket_cat_payment">Płatność</option>
+                        <option value="Zwrot" data-i18n="ticket_cat_refund">Zwrot</option>
+                        <option value="Inne" data-i18n="ticket_cat_other">Inne</option>
+                    </select>
+                    <input type="text" id="ticket-order" placeholder="Numer zamówienia (opcjonalnie)" data-i18n="ticket_order">
+                    <textarea id="ticket-message" placeholder="Opisz swój problem..." rows="4" required data-i18n="ticket_message"></textarea>
+                    <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                        <button type="button" class="back-btn" onclick="document.getElementById('ticket-section').style.display='none'" style="padding:12px 24px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;font-weight:600;" data-i18n="ticket_cancel">Anuluj</button>
+                        <button type="submit" class="submit-btn" style="padding:12px 32px;" data-i18n="ticket_submit">Wyślij zgłoszenie</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ===== MOJE ZGŁOSZENIA ===== -->
+            <div class="support-tickets-section">
+                <div class="support-tickets-header">
+                    <h2 data-i18n="support_my_tickets">Moje zgłoszenia</h2>
+                    <button class="support-view-all" id="support-view-all" data-i18n="support_view_all">Zobacz wszystkie →</button>
+                </div>
+                <div class="support-tickets-list" id="support-tickets-list">
+                    <!-- Tickety będą renderowane przez JS -->
+                </div>
+            </div>
+
+            <!-- ===== FAQ ===== -->
+            <div class="support-faq-section">
+                <h2 class="support-faq-title" data-i18n="support_faq">Najczęściej zadawane pytania</h2>
+                <div class="support-faq-grid">
+                    <!-- Lewa kolumna -->
+                    <div class="support-faq-col">
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q1">Jak długo trwa realizacja zamówienia? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a1">Realizacja zamówienia trwa od kilku minut do maksymalnie 24 godzin. W większości przypadków otrzymujesz dostęp w ciągu 5–15 minut od momentu zakupu.</div>
+                        </div>
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q2">Jak działa gwarancja? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a2">Oferujemy 30-dniową gwarancję na wszystkie zakupione konta. Jeśli konto przestanie działać, wymieniamy je na nowe lub zwracamy pieniądze.</div>
+                        </div>
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q3">Jak otrzymam zakupione konto? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a3">Dane dostępowe (login i hasło) otrzymasz na podany adres email natychmiast po zakończeniu płatności. Możesz też znaleźć je w zakładce "Moje konto".</div>
+                        </div>
+                    </div>
+                    <!-- Prawa kolumna -->
+                    <div class="support-faq-col">
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q4">Jak dokonać zwrotu? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a4">Aby dokonać zwrotu, skontaktuj się z nami przez e-mail lub utwórz zgłoszenie w centrum pomocy. Zwrot realizujemy w ciągu 48 godzin od momentu zgłoszenia.</div>
+                        </div>
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q5">Co zrobić, jeśli konto nie działa? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a5">Skontaktuj się z nami natychmiast. Zweryfikujemy problem i w ciągu kilku minut wyślemy Ci nowe dane dostępowe lub naprawimy istniejące konto.</div>
+                        </div>
+                        <div class="support-faq-item">
+                            <button class="support-faq-question" data-i18n="faq_q6">Czy mogę zmienić dane po zakupie? <span>▼</span></button>
+                            <div class="support-faq-answer" data-i18n="faq_a6">Tak, jeśli chcesz zmienić adres email lub inne dane powiązane z zamówieniem, skontaktuj się z nami, a wprowadzimy poprawki w systemie.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- SZCZEGÓŁY PRODUKTU -->
+    <div class="page" id="product-page" style="display:none;">
+        <section class="product-detail-section">
+            <button class="back-to-shop" onclick="showPage('products')" data-i18n="detail_back">← Wróć do sklepu</button>
+            <div class="product-detail">
+                <div class="product-detail-left">
+                    <img id="product-detail-image" src="" alt="" class="product-detail-img">
+                </div>
+                <div class="product-detail-right">
+                    <h2 class="product-detail-name" id="product-detail-name"></h2>
+                    <p class="product-detail-price" id="product-detail-price"></p>
+                    <p class="product-detail-short" id="product-detail-short"></p>
+                    <div class="product-detail-availability"><span class="green-dot"></span> <span data-i18n="detail_available">Dostępny</span></div>
+                    <div class="product-detail-actions">
+                        <button class="add-to-cart-detail" onclick="addToCartFromDetail()" data-i18n="detail_add_cart">Dodaj do koszyka</button>
+                        <button class="buy-now-btn" onclick="buyNow()" data-i18n="detail_buy_now">Kup teraz</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-detail-bottom">
+                <div class="product-detail-features" id="product-detail-features">
+                    <h3 data-i18n="detail_features">Najważniejsze cechy</h3>
+                    <ul></ul>
+                </div>
+                <div class="product-detail-specs">
+                    <h3 data-i18n="detail_specs">Specyfikacja</h3>
+                    <table id="product-detail-specs-table"></table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- KONTO -->
+    <div class="page" id="account-page" style="display:none;">
+        <section class="account-section">
+            <h2 class="section-title" data-i18n="account_title">Moje konto</h2>
+            <div class="account-info">
+                <p><span data-i18n="account_logged_as">Zalogowany jako:</span> <strong id="account-login"></strong></p>
+                <p><span data-i18n="account_role">Rola:</span> <strong id="account-role"></strong></p>
+            </div>
+            <div class="account-stats">
+                <div class="stat-card"><span data-i18n="account_orders">Zamówienia</span><strong id="account-orders-count">0</strong></div>
+                <div class="stat-card"><span data-i18n="account_spent">Wydano</span><strong id="account-total-spent">0.00 zł</strong></div>
+            </div>
+            <div class="account-history"><h3 data-i18n="account_history">Historia zamówień</h3><div id="account-orders"></div></div>
+            <div class="account-tickets">
+                <h3 data-i18n="support_my_tickets">Moje zgłoszenia</h3>
+                <div id="account-tickets-list"></div>
+            </div>
+            <button class="logout-btn" onclick="logout()" data-i18n="account_logout">Wyloguj</button>
+        </section>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="page" id="admin-page" style="display:none;">
+        <div class="admin-main">
+            <div class="admin-header">
+    <div class="admin-header-left">
+        <h2 class="admin-title" data-i18n-html="admin_title">Panel <span style="color:var(--primary)">Administratora</span></h2>
+        <div class="admin-user-badge">
+            <span class="admin-user-icon"></span>
+            <span class="admin-user-label" data-i18n="admin_logged_as">Zalogowany jako</span>
+            <strong class="admin-user-name" id="admin-user-login"></strong>
+        </div>
+    </div>
+    <button class="logout-btn" onclick="window.logoutUser(); window.showPage('home')" data-i18n="account_logout">Wyloguj</button>
+</div>
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('orders')" data-i18n="admin_tab_orders">Zamówienia</button>
+                <button class="admin-tab" onclick="switchAdminTab('logs')" data-i18n="admin_tab_logs">Logi</button>
+                <button class="admin-tab" onclick="switchAdminTab('products')" data-i18n="admin_tab_products">Produkty</button>
+                <button class="admin-tab" onclick="switchAdminTab('stats')" data-i18n="admin_tab_stats">Statystyki</button>
+                <button class="admin-tab" onclick="switchAdminTab('users')" data-i18n="admin_tab_users">Użytkownicy</button>
+                <button class="admin-tab" onclick="switchAdminTab('keys')" data-i18n="admin_tab_keys">Klucze</button>
+                <button class="admin-tab" onclick="switchAdminTab('tickets')" data-i18n="admin_tab_tickets">Tickety <span id="tickets-count" class="tickets-badge" style="display:none;">0</span></button>
+            </div>
+            
+            <div class="admin-tab-content" id="admin-tab-orders">
+    <section class="admin-section">
+        <h2 class="admin-section-title" data-i18n="admin_tab_orders">Zamówienia</h2>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-orders" placeholder="Szukaj zamówienia (ID, klient, email)..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-orders').value=''; document.getElementById('admin-search-orders').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <button class="danger-btn" onclick="clearOrders()" data-i18n="admin_clear_orders">Wyczyść zamówienia</button>
+        <div class="orders-list" id="orders-list"></div>
+    </section>
+</div>
+            <div class="admin-tab-content" id="admin-tab-logs" style="display:none;">
+    <section class="admin-section">
+        <h2 class="admin-section-title" data-i18n="admin_tab_logs">Logi aktywności</h2>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-logs" placeholder="Szukaj logów (IP, data, akcja)..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-logs').value=''; document.getElementById('admin-search-logs').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <div class="logs-buttons">
+            <button class="danger-btn" onclick="clearLogs()" data-i18n="admin_clear_logs">Wyczyść logi</button>
+            <button class="save-btn" onclick="exportLogs()" data-i18n="admin_export_logs">Zapisz logi</button>
+        </div>
+        <div class="logs-table-container">
+            <table class="logs-table">
+                <thead>
+                    <tr><th>Data</th><th>IP</th><th>Urządzenie</th><th>Przeglądarka</th><th>Strona</th><th>Akcja</th><th>Status</th><th>Miejscowość</th></tr>
+                </thead>
+                <tbody id="logs-table-body"></tbody>
+            </table>
+        </div>
+    </section>
+</div>>
+            <div class="admin-tab-content" id="admin-tab-products" style="display:none;">
+    <section class="admin-section">
+        <h2 class="admin-section-title" data-i18n="admin_tab_products">Produkty</h2>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-products" placeholder="Szukaj produktu po nazwie..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-products').value=''; document.getElementById('admin-search-products').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <div class="admin-form">
+            <h3 data-i18n="admin_add_product">Dodaj nowy produkt</h3>
+            <input type="text" id="admin-name" placeholder="Nazwa produktu" data-i18n="admin_product_name">
+            <input type="number" id="admin-price" placeholder="Cena (zł)" step="0.01" data-i18n="admin_product_price">
+            <input type="text" id="admin-image" placeholder="URL zdjęcia" data-i18n="admin_product_image">
+            <input type="number" id="admin-stock" placeholder="Stan magazynowy" min="0" data-i18n="admin_product_stock">
+            <textarea id="admin-description" placeholder="Opis produktu" rows="2" data-i18n="admin_product_description"></textarea>
+            <input type="text" id="admin-features" placeholder="Najważniejsze cechy (oddziel przecinkiem)" data-i18n="admin_product_features">
+            <input type="text" id="admin-specs" placeholder="Specyfikacja (klucz:wartość, oddziel przecinkiem)" data-i18n="admin_product_specs">
+            <button class="admin-btn" onclick="addProduct()" data-i18n="admin_add_product">Dodaj produkt</button>
+        </div>
+        <div class="admin-list" id="admin-list"></div>
+    </section>
+</div>
+            <div class="admin-tab-content" id="admin-tab-stats" style="display:none;">
+                <section class="admin-section">
+                    <h2 class="admin-section-title" data-i18n="admin_tab_stats">Statystyki sprzedaży</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card"><span data-i18n="account_spent">Łączna sprzedaż</span><strong id="stats-total-revenue">0.00 zł</strong></div>
+                        <div class="stat-card"><span data-i18n="account_orders">Liczba zamówień</span><strong id="stats-total-orders">0</strong></div>
+                        <div class="stat-card"><span>Dzisiejsze zamówienia</span><strong id="stats-today-orders">0</strong></div>
+                        <div class="stat-card"><span data-i18n="admin_tab_users">Liczba użytkowników</span><strong id="stats-total-users">0</strong></div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sales-chart"></canvas>
+                    </div>
+                </section>
+            </div>
+            <div class="admin-tab-content" id="admin-tab-users" style="display:none;">
+    <section class="admin-section">
+        <h2 class="admin-section-title" data-i18n="admin_tab_users">Użytkownicy</h2>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-users" placeholder="Szukaj użytkownika (nazwa, email)..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-users').value=''; document.getElementById('admin-search-users').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <div class="users-list" id="users-list"></div>
+    </section>
+</div>
+            <div class="admin-tab-content" id="admin-tab-keys" style="display:none;">
+    <section class="admin-section">
+        <h2 class="admin-section-title" data-i18n="admin_tab_keys">Wydane klucze</h2>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-keys" placeholder="Szukaj klucza (klucz, klient)..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-keys').value=''; document.getElementById('admin-search-keys').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <div class="keys-list" id="keys-list"></div>
+    </section>
+</div>
+            <div class="admin-tab-content" id="admin-tab-tickets" style="display:none;">
+    <section class="admin-section">
+        <div class="ticket-tool-header">
+            <h2 class="admin-section-title" data-i18n="admin_tab_tickets">System zgłoszeń</h2>
+            <div class="ticket-tool-stats">
+                <span class="ticket-stat open">Otwarte: <strong id="tickets-open-count">0</strong></span>
+                <span class="ticket-stat progress">W trakcie: <strong id="tickets-progress-count">0</strong></span>
+                <span class="ticket-stat closed">Zamknięte: <strong id="tickets-closed-count">0</strong></span>
+            </div>
+        </div>
+        <div class="admin-search-bar" style="display:flex;gap:10px;margin-bottom:15px;">
+            <input type="text" id="admin-search-tickets" placeholder="Szukaj zgłoszenia (ID, nazwa, kategoria)..." style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);">
+            <button onclick="document.getElementById('admin-search-tickets').value=''; document.getElementById('admin-search-tickets').dispatchEvent(new Event('input'));" style="padding:10px 20px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;cursor:pointer;">Wyczyść</button>
+        </div>
+        <div class="ticket-tool-filters">
+            <button class="ticket-filter active" onclick="filterTickets('all', this)" data-i18n="all">Wszystkie</button>
+            <button class="ticket-filter" onclick="filterTickets('Otwarty', this)" data-i18n="open">Otwarte</button>
+            <button class="ticket-filter" onclick="filterTickets('W trakcie', this)" data-i18n="in_progress">W trakcie</button>
+            <button class="ticket-filter" onclick="filterTickets('Odpowiedziano', this)" data-i18n="answered">Odpowiedziano</button>
+            <button class="ticket-filter" onclick="filterTickets('Zamknięty', this)" data-i18n="closed">Zamknięte</button>
+            <button class="ticket-filter archive" onclick="window.loadArchivedTicketsAdmin()"> Archiwum</button>
+<button class="ticket-filter" id="tickets-back-btn" onclick="window.goBackToActiveTickets()" style="display:none; background:rgba(59,130,246,0.08); border-color:#3b82f6; color:#3b82f6;">← Wróć do aktywnych</button>
+        </div>
+        <div class="ticket-tool-list" id="tickets-list"></div>
+    </section>
+</div>
+        </div>
+    </div>
+
+    <!-- ============ KOSZYK ============ -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2 data-i18n="cart_title">Koszyk <span class="cart-count-badge" id="cart-count-header">0</span></h2>
+            <button class="close-btn" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <span class="label" data-i18n="cart_subtotal">Subtotal</span>
+                <span class="total"><span id="cart-total">0.00</span> zł</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()" data-i18n="cart_checkout">Złóż zamówienie</button>
+            <div class="cart-footer-actions">
+                <button class="view-cart-btn" onclick="showCartPage()" data-i18n="cart_view_page">Zobacz stronę koszyka</button>
+                <button class="clear-cart-btn" onclick="clearCart()" data-i18n="cart_clear">Wyczyść koszyk</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MODALE ============ -->
+    <!-- LOGOWANIE -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2 data-i18n="nav_login">Logowanie</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Login" required>
+                <input type="password" id="login-password" placeholder="Hasło" required>
+                <div class="login-error" id="login-error" style="display:none;">Błędny login lub hasło</div>
+                <button type="submit" class="submit-btn" data-i18n="nav_login">Zaloguj</button>
+                <button type="button" class="close-modal-btn" onclick="closeLogin()" data-i18n="cancel">Anuluj</button>
+            </form>
+            <p style="text-align:center;margin-top:15px;color:rgba(255,255,255,0.5);">
+                <span data-i18n="no_account">Nie masz konta?</span> <a href="#" onclick="switchToRegister()" style="color:#3b82f6;" data-i18n="register">Zarejestruj się</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- REJESTRACJA -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <h2 data-i18n="register">Rejestracja</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Nazwa użytkownika" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Hasło (min. 6 znaków)" required>
+                <div class="login-error" id="register-error" style="display:none;">Błąd rejestracji</div>
+                <button type="submit" class="submit-btn" data-i18n="register">Załóż konto</button>
+                <button type="button" class="close-modal-btn" onclick="closeRegister()" data-i18n="cancel">Anuluj</button>
+            </form>
+            <p style="text-align:center;margin-top:15px;color:rgba(255,255,255,0.5);">
+                <span data-i18n="have_account">Masz konto?</span> <a href="#" onclick="switchToLogin()" style="color:#3b82f6;" data-i18n="nav_login">Zaloguj się</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ZAMÓWIENIE - DANE -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="checkout_title">Dane zamówienia</h2>
+                <button class="close-modal-btn" onclick="closeOrder()">✕</button>
+            </div>
+            <form id="order-form">
+                <input type="text" id="order-name" placeholder="Imię i nazwisko" required data-i18n="checkout_name">
+                <input type="email" id="order-email" placeholder="Email" required data-i18n="checkout_email">
+                <input type="text" id="order-address" placeholder="Adres email do wysyłki" required data-i18n="checkout_address">
+                <button type="button" class="submit-btn" onclick="goToSummary()" data-i18n="checkout_next">Dalej</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PODSUMOWANIE -->
+    <div class="modal" id="summary-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="checkout_summary">Podsumowanie zamówienia</h2>
+                <button class="close-modal-btn" onclick="closeSummary()">✕</button>
+            </div>
+            <div id="summary-items"></div>
+            <div class="discount-section">
+                <input type="text" id="discount-code" placeholder="Kod rabatowy" data-i18n="checkout_discount">
+                <button class="discount-btn" onclick="applyDiscount()" data-i18n="checkout_apply">Zastosuj</button>
+                <div id="discount-message"></div>
+            </div>
+            <div class="summary-total"><span data-i18n="checkout_total">Suma:</span> <span id="summary-total">0.00 zł</span></div>
+            <div class="summary-actions">
+                <button class="back-btn" onclick="backToForm()" data-i18n="checkout_back">Wstecz</button>
+                <button class="pay-btn" onclick="processPayment()" data-i18n="checkout_pay">Zapłać</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUKCES -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h2 data-i18n="success_title">Dziękujemy za zakup!</h2>
+            <p class="success-text" data-i18n="success_desc">Twoje zamówienie zostało przyjęte.</p>
+            <div class="license-box"><span data-i18n="success_key">Twój klucz:</span><strong id="license-key">XXXX-XXXX-XXXX-XXXX</strong></div>
+            <p class="success-email" data-i18n="success_email">Dane dostępowe wysłano na podany adres email.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:15px;">
+                <button class="submit-btn" onclick="closeSuccess()" data-i18n="success_close">Zamknij</button>
+                <button class="review-btn" onclick="openReviewForm()" data-i18n="success_review">Dodaj opinię</button>
+            </div>
+            <div id="review-form-container" style="display:none; margin-top:20px;">
+                <textarea id="review-text" placeholder="Twoja opinia..." rows="3" data-i18n="success_review_placeholder"></textarea>
+                <div class="star-rating" id="star-rating">
+                    <span onclick="setRating(1)">★</span>
+                    <span onclick="setRating(2)">★</span>
+                    <span onclick="setRating(3)">★</span>
+                    <span onclick="setRating(4)">★</span>
+                    <span onclick="setRating(5)">★</span>
+                </div>
+                <button class="submit-btn" onclick="submitReview()" data-i18n="success_review_submit">Wyślij opinię</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDYTUJ PRODUKT -->
+    <div class="modal" id="edit-product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="admin_edit">Edytuj produkt</h2>
+                <button class="close-modal-btn" onclick="closeEditProductModal()">✕</button>
+            </div>
+            <form id="edit-product-form">
+                <input type="text" id="edit-name" placeholder="Nazwa produktu" required data-i18n="admin_product_name">
+                <input type="number" id="edit-price" placeholder="Cena (zł)" step="0.01" required data-i18n="admin_product_price">
+                <input type="text" id="edit-image" placeholder="URL zdjęcia" data-i18n="admin_product_image">
+                <input type="number" id="edit-stock" placeholder="Stan magazynowy" min="0" required data-i18n="admin_product_stock">
+                <textarea id="edit-description" placeholder="Opis produktu" rows="2" data-i18n="admin_product_description"></textarea>
+                <input type="text" id="edit-features" placeholder="Najważniejsze cechy (oddziel przecinkiem)" data-i18n="admin_product_features">
+                <input type="text" id="edit-specs" placeholder="Specyfikacja (klucz:wartość, oddziel przecinkiem)" data-i18n="admin_product_specs">
+                <button type="submit" class="submit-btn" data-i18n="save">Zapisz zmiany</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- POTWIERDZENIE -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <h2 id="confirm-title" data-i18n="confirm">Potwierdzenie</h2>
+            <p id="confirm-message" class="success-text" data-i18n="confirm_message">Czy na pewno chcesz to zrobić?</p>
+            <div class="summary-actions">
+                <button class="back-btn" onclick="closeConfirmModal()" data-i18n="cancel">Anuluj</button>
+                <button class="pay-btn" onclick="confirmYes()" data-i18n="yes">Tak, potwierdzam</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CZAT TICKET -->
+    <div class="modal" id="ticket-view-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="ticket-view-title" data-i18n="ticket_open">Zgłoszenie</h2>
+                <button class="close-modal-btn" onclick="closeTicketViewModal()">✕</button>
+            </div>
+            <div class="ticket-view-messages" id="ticket-view-content"></div>
+            <div class="ticket-reply-section">
+                <textarea id="ticket-reply-text" placeholder="Napisz odpowiedź..." rows="3" data-i18n="ticket_write_reply"></textarea>
+                <button class="submit-btn" onclick="sendUserReplyRealTime(currentViewingTicketId)" data-i18n="ticket_send_reply">Wyślij odpowiedź</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ STOPKA ============ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">NEXUS<span>MARKET</span></div>
+            <div class="footer-links">
+                <a href="#" onclick="showPage('home')" data-i18n="footer_home">Strona główna</a>
+                <a href="#" onclick="showPage('products')" data-i18n="footer_products">Produkty</a>
+                <a href="#" onclick="showPage('reviews')" data-i18n="footer_reviews">Opinie</a>
+                <a href="#" onclick="showPage('support')" data-i18n="footer_contact">Kontakt</a>
+                <a href="#" onclick="showCartPage()" data-i18n="footer_cart">Koszyk</a>
+                <a href="#" data-i18n="footer_terms">Regulamin</a>
+                <a href="#" data-i18n="footer_privacy">Polityka prywatności</a>
+            </div>
+            <div class="footer-copy" data-i18n="footer_copyright">© 2025 NEXUS MARKET. Wszelkie prawa zastrzeżone.</div>
+        </div>
+    </footer>
+
+</body>
+</html>
